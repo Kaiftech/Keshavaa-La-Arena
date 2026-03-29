@@ -190,29 +190,51 @@ section {
   z-index: 1000;
 }
 
+.mobile-hide {
+  display: block;
+}
+
+.desktop-only {
+  display: block;
+}
+
 @media (max-width: 1024px) {
   .app-layout { 
     display: flex !important; 
     flex-direction: column !important; 
     overflow: visible !important; 
   }
+
+  .mobile-hide {
+    display: none !important;
+  }
+  
+  .desktop-only {
+    display: none !important;
+  }
+
   .content-column { 
     width: 100% !important; 
     max-width: 100% !important; 
     margin-right: 0 !important; 
     padding-right: 0 !important;
-    padding-top: 80px; 
+    padding-top: 70px !important; 
     order: 1; 
   }
+
   .form-column { 
+    order: 2; 
     position: relative; 
     width: 100%; 
     height: auto; 
-    border-left: none; 
-    order: 2; 
-    margin: 0 !important;
+    border-left: none;
+    background: white;
   }
-  .header { width: 100% !important; }
+  
+  header.header {
+    width: 100% !important;
+    height: 70px !important;
+  }
 }
 
 /* Animations */
