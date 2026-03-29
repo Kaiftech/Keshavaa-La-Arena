@@ -1,34 +1,51 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Luxury Palette */
+  --primary: #d4af37; /* Metallic Gold */
+  --primary-dark: #b8860b;
+  --secondary: #1a1a1a; /* Soft Black */
+  --accent: #f0e6d2; /* Lighter Champagne */
+  --bg-main: #ffffff;
+  --bg-alt: #fbf9f4; /* Subtle cream */
+  --text-main: #1a1a1a;
+  --text-muted: #555555;
+  --text-on-dark: #ffffff;
+  --text-on-gold: #ffffff;
+  
+  /* Contrast CTA Color - For Attention */
+  --cta-accent: #ff6b35; /* Ardent Sunset Orange - High Contrast */
+  --cta-hover: #e85d2b;
+  
+  /* Layout Math Tokens */
+  --header-height: clamp(80px, 10vh, 100px);
+  --sidebar-width: 320px;
+  --container-width: min(1200px, 90vw);
+  --section-padding: clamp(60px, 10vh, 120px);
+  
+  /* Fluid Typography */
+  --fs-h1: clamp(2.5rem, 8vw + 1rem, 6rem);
+  --fs-h2: clamp(1.8rem, 4vw + 1rem, 3rem);
+  --fs-h3: clamp(1.3rem, 2vw + 1rem, 2rem);
+  --fs-body: clamp(0.9rem, 0.5vw + 0.5rem, 1.1rem);
+  
+  /* Glassmorphism Styles */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(212, 175, 55, 0.2);
+  --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  
+  /* Squircle & Smooth Optics */
+  --radius-squircle: 30px;
+  --radius-button: 100px; /* Pillow style for better eyes */
+  --shadow-soft: 0 20px 50px -10px rgba(0, 0, 0, 0.08);
+  --shadow-gold: 0 20px 40px -5px rgba(212, 175, 55, 0.2);
+  
+  --transition-smooth: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.25s ease;
 }
 
 * {
@@ -37,13 +54,191 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  color: var(--text-main);
+  background: var(--bg-main);
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a, Link {
+  text-decoration: none !important;
+  color: inherit !important;
 }
+
+body {
+  font-family: var(--font-inter), -apple-system, sans-serif;
+  line-height: 1.7;
+  font-size: var(--fs-body);
+}
+
+h1, h2, h3, h4, .font-luxury {
+  font-family: var(--font-playfair), serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 0.4em;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+section {
+  padding: var(--section-padding) 0;
+  width: 100%;
+}
+
+.container {
+  width: var(--container-width);
+  max-width: 100%; /* Important to not exceed parent content-column */
+  margin: 0 auto;
+  padding: 0 40px; /* Strong internal padding for text safety */
+  position: relative;
+}
+
+.title-underline {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.title-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  width: clamp(40px, 10vw, 80px);
+  height: 3px;
+  background: var(--primary);
+}
+
+/* Luxury Utilities */
+.btn-premium {
+  padding: 16px 40px;
+  background: var(--primary);
+  color: var(--text-on-gold);
+  border: none;
+  border-radius: var(--radius-button);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-premium:hover {
+  background: var(--primary-dark);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(212, 175, 55, 0.5);
+}
+
+/* Layout Core */
+.app-layout {
+  display: grid !important;
+  grid-template-columns: 1fr var(--sidebar-width) !important;
+  width: 100% !important;
+  min-height: 100vh;
+  position: relative;
+  background: white;
+}
+
+.content-column {
+  grid-column: 1; 
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.form-column {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed; /* Back to Fixed! */
+  top: 0;
+  right: 0;
+  z-index: 2000;
+  background: white;
+  border-left: 1px solid var(--accent);
+}
+
+.grid-reservation {
+  grid-column: 2;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* Header stability */
+.header {
+  height: 80px;
+  width: calc(100% - var(--sidebar-width));
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: 1000;
+}
+
+@media (max-width: 1024px) {
+  .app-layout { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    overflow: visible !important; 
+  }
+  .content-column { 
+    width: 100% !important; 
+    max-width: 100% !important; 
+    margin-right: 0 !important; 
+    padding-right: 0 !important;
+    padding-top: 80px; 
+    order: 1; 
+  }
+  .form-column { 
+    position: relative; 
+    width: 100%; 
+    height: auto; 
+    border-left: none; 
+    order: 2; 
+    margin: 0 !important;
+  }
+  .header { width: 100% !important; }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+.highlight-pulse { animation: pulse 1.5s infinite; }@keyframes breathe {
+  0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2); }
+  50% { transform: scale(1.03); box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4); }
+  100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2); }
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
