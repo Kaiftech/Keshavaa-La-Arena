@@ -1,399 +1,266 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const LeadForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: ''
-  });
-  const [viewers, setViewers] = useState(14);
-  const [showWhatsApp, setShowWhatsApp] = useState(false);
-
-  useEffect(() => {
-    // Generate random number between 12 and 22
-    setViewers(Math.floor(Math.random() * 11) + 12);
-
-    const handleScroll = () => {
-      // Show WhatsApp button only after scrolling past the Hero banner (>500px)
-      setShowWhatsApp(window.scrollY > 500);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Submitted:', formData);
-    window.location.href = '/thank-you';
+    setSubmitted(true);
   };
 
   return (
-    <>
-      <div id="lead-form" className="lead-card">
+    <div className="lead-form-container">
+      {/* Corner Brackets */}
+      <div className="corner-bracket" />
+
+      {submitted ? (
+        <div className="form-success">
+           <div className="success-icon">
+              <span>✓</span>
+           </div>
+           <h3>Registry Confirmed</h3>
+           <p>A consultant will contact you shortly.</p>
+        </div>
+      ) : (
         <div className="form-inner">
           <div className="form-header">
-            <h3 className="font-luxury">LA ARENA</h3>
-            <p className="premium-tag">BY KESHAVAA DEVELOPERS • GOA</p>
+             <span className="eyebrow">THE REGISTRATION</span>
+             <h3>Private <span>Enquiry.</span></h3>
+             <p className="desc">Request exclusive access to pre-launch pricing and floor plans.</p>
           </div>
-          
-          <div className="form-body">
-            <div className="live-counter">
-              <span className="pulsing-dot"></span>
-              {viewers} People viewing this right now
+
+          <form className="lead-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>FULL NAME</label>
+              <input 
+                type="text" 
+                placeholder="Marcus Aurelius" 
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+              />
+            </div>
+            
+            <div className="form-row">
+               <div className="form-group">
+                 <label>OFFICIAL EMAIL</label>
+                 <input 
+                   type="email" 
+                   placeholder="principle@estate.com" 
+                   required
+                   value={formData.email}
+                   onChange={(e) => setFormData({...formData, email: e.target.value})}
+                 />
+               </div>
+               
+               <div className="form-group">
+                 <label>DIRECT TELEPHONE</label>
+                 <input 
+                   type="tel" 
+                   placeholder="+91 . . . . . . . . . ." 
+                   required
+                   value={formData.phone}
+                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                 />
+               </div>
             </div>
 
-            <div className="exclusive-badges">
-              <span className="badge-item gold">New Launch</span>
-              <span className="badge-item active">Best ROI</span>
-            </div>
-            
-            <h4>Unlock Private Pricing</h4>
-            <div className="marketing-highlights">
-               <ul className="highlight-list">
-                 <li><span>✓</span> Luxury Spacious Apartments</li>
-                 <li><span>✓</span> High Fixed Rental Potential</li>
-                 <li><span>✓</span> Premium Modular Kitchen & A/C</li>
-                 <li><span>✓</span> Multiple BHK & Jodi Options</li>
-                 <li><span>✓</span> Attractive EOI Plans Available</li>
-               </ul>
-            </div>
-            
-            <form onSubmit={handleSubmit}>
-              <div className="input-group">
-                <input 
-                  type="text" 
-                  placeholder="Full Name" 
-                  required 
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                />
-              </div>
-              <div className="input-group">
-                <input 
-                  type="tel" 
-                  placeholder="Phone Number" 
-                  required 
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                />
-              </div>
-              <button type="submit" className="btn-premium aggressive-btn animate-breathe contrast-cta">
-                GET INSTANT CALLBACK
-                <span className="btn-glow"></span>
-              </button>
-            </form>
-            
-            <p className="timer-notice">Exclusive Pre-Launch Benefits Ending Soon</p>
-          </div>
+            <button type="submit" className="submit-btn">
+               REGISTER INTEREST <span className="arrow">→</span>
+            </button>
+          </form>
 
           <div className="form-footer">
-             <p>Register to Download Brochure</p>
+             <p>GDPR Compliant & Discreet</p>
           </div>
         </div>
-      </div>
-
-      <div className="mobile-bottom-bar">
-        <a 
-          href="https://wa.me/91XXXXXXXXXX" 
-          className="bottom-btn whatsapp-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className="btn-icon">💬</span>
-          WHATSAPP
-        </a>
-        <a href="#lead-form" className="bottom-btn enquiry-btn">
-          <span className="btn-icon">📩</span>
-          ENQUIRE NOW
-        </a>
-      </div>
-
-      {showWhatsApp && (
-        <a 
-          href="https://wa.me/91XXXXXXXXXX" 
-          className="whatsapp-float desktop-only animate-fade-up"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="Chat on WhatsApp"
-        >
-          <span className="whatsapp-icon">💬</span>
-          <span>WhatsApp</span>
-        </a>
       )}
 
       <style jsx>{`
-        .lead-card {
-           background: #ffffff;
-           height: 100vh;
-           width: 100%;
-           display: flex;
-           flex-direction: column;
-           overflow: hidden;
+        .lead-form-container {
            position: relative;
+           background: white;
+           padding: 64px;
+           border: 1px solid rgba(154, 128, 94, 0.15);
+           box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+           max-width: 700px;
+           margin: 0 auto;
+           text-align: left;
         }
 
-        .live-counter {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          font-size: 0.75rem;
-          color: #ff4444;
-          font-weight: 700;
-          background: rgba(255, 68, 68, 0.05);
-          padding: 8px;
-          border-radius: 8px;
-          margin-bottom: 5px;
+        .corner-bracket {
+           position: absolute;
+           top: -1px; left: -1px;
+           width: 40px; height: 40px;
+           border-top: 2px solid rgba(154, 128, 94, 0.8);
+           border-left: 2px solid rgba(154, 128, 94, 0.8);
         }
 
-        .pulsing-dot {
-          width: 8px;
-          height: 8px;
-          background: #ff4444;
-          border-radius: 50%;
-          animation: dotPulse 1.5s infinite;
+        .form-success {
+           padding: 80px 0;
+           display: flex; flex-direction: column; align-items: center; text-align: center;
+           animation: reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
         }
 
-        @keyframes dotPulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.5); opacity: 0.5; }
-          100% { transform: scale(1); opacity: 1; }
+        .success-icon {
+           width: 64px; height: 64px; margin-bottom: 40px;
+           border: 1px solid rgba(154, 128, 94, 0.4);
+           display: flex; align-items: center; justify-content: center;
+           animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .success-icon span { color: var(--gold-muted); font-size: 24px; }
+
+        .form-success h3 {
+           font-family: var(--font-playfair);
+           font-style: italic;
+           font-size: 40px;
+           color: var(--gold-muted);
+           margin-bottom: 24px;
+           line-height: 1.1;
+        }
+
+        .form-success p {
+           font-family: var(--font-inter);
+           font-size: 11px;
+           font-weight: 800;
+           letter-spacing: 0.4em;
+           text-transform: uppercase;
+           color: rgba(74, 74, 74, 0.6);
         }
 
         .form-inner {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
+           animation: reveal 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
         }
 
-        .form-header {
-          padding: clamp(15px, 3vh, 35px) 30px;
-          background: var(--secondary);
-          color: white;
-          text-align: center;
-          border-bottom: 2px solid var(--primary);
+        .form-header { text-align: center; margin-bottom: 56px; }
+
+        .eyebrow {
+           display: block;
+           font-family: var(--font-inter);
+           font-size: 10px;
+           letter-spacing: 0.5em;
+           font-weight: 800;
+           color: var(--gold-muted);
+           text-transform: uppercase;
+           margin-bottom: 16px;
         }
 
         .form-header h3 {
-          font-size: clamp(1.2rem, 3vh, 1.8rem);
-          margin-bottom: 2px;
-          letter-spacing: 5px;
+           font-family: var(--font-inter);
+           font-size: 50px;
+           font-weight: 300;
+           line-height: 1;
+           color: #030303;
+           margin-bottom: 16px;
         }
 
-        .premium-tag {
-          font-size: 0.6rem;
-          letter-spacing: 2px;
-          color: var(--primary);
-          font-weight: 700;
+        .form-header h3 span {
+           font-family: var(--font-playfair);
+           font-style: italic;
+           color: var(--gold-muted);
         }
 
-        .form-body {
-          padding: 25px 35px;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          gap: 15px;
+        .desc {
+           font-family: var(--font-inter);
+           font-size: 14px;
+           color: rgba(74, 74, 74, 0.7);
+           max-width: 350px;
+           margin: 0 auto;
+           line-height: 1.6;
         }
 
-        .exclusive-badges {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
+        .lead-form { display: flex; flex-direction: column; gap: 40px; }
+
+        .form-row {
+           display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
         }
 
-        .badge-item {
-          font-size: 0.6rem;
-          background: #f0f0f0;
-          padding: 4px 10px;
-          border-radius: 50px;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 1px;
+        .form-group label {
+           font-family: var(--font-inter);
+           font-size: 10px;
+           text-transform: uppercase;
+           letter-spacing: 0.3em;
+           font-weight: 800;
+           color: var(--gold-muted);
+           margin-bottom: 12px;
+           display: block;
         }
 
-        .badge-item.gold {
-          background: var(--primary);
-          color: white;
+        .form-group input {
+           width: 100%;
+           background: transparent;
+           border: none;
+           border-bottom: 1px solid rgba(3, 3, 3, 0.1);
+           padding-bottom: 12px;
+           font-family: var(--font-playfair);
+           font-size: 20px;
+           font-style: italic;
+           color: #030303;
+           transition: border-color 0.3s ease;
         }
 
-        .form-body h4 {
-          font-size: 1rem;
-          color: var(--secondary);
-          text-align: center;
-          margin: 0;
-          font-weight: 800;
+        .form-group input:focus { outline: none; border-bottom-color: var(--gold-muted); }
+
+        .form-group input::placeholder {
+           color: rgba(3, 3, 3, 0.2);
+           font-style: normal;
+           font-family: var(--font-inter);
+           font-size: 14px;
         }
 
-        .highlight-list {
-          list-style: none;
-          padding: 0;
-          margin: 0;
+        .submit-btn {
+           margin-top: 24px;
+           padding: 24px;
+           background: #030303;
+           color: white;
+           font-family: var(--font-inter);
+           font-size: 11px;
+           font-weight: 900;
+           text-transform: uppercase;
+           letter-spacing: 0.4em;
+           border: none;
+           cursor: pointer;
+           transition: background 0.5s ease;
+           display: flex; align-items: center; justify-content: center;
+           width: 100%;
         }
 
-        .highlight-list li {
-          font-size: 0.75rem;
-          margin-bottom: 6px;
-          color: var(--text-main);
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-weight: 600;
-        }
-
-        .highlight-list span {
-          color: var(--primary);
-          font-weight: 900;
-        }
-
-        .input-group {
-          margin-bottom: 12px;
-        }
-
-        input {
-          width: 100%;
-          padding: 12px 20px;
-          border: 1px solid #eee;
-          background: #fdfdfd;
-          border-radius: 12px;
-          font-family: inherit;
-          font-size: 0.9rem;
-          transition: var(--transition-fast);
-        }
-
-        input:focus {
-          outline: none;
-          border-color: var(--primary);
-          background: #fff;
-          box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-        }
-
-        .contrast-cta {
-          background: var(--cta-accent) !important;
-          color: white !important;
-          border: none !important;
-          box-shadow: 0 10px 40px rgba(255, 107, 53, 0.3) !important;
-        }
-
-        .contrast-cta:hover {
-          background: var(--cta-hover) !important;
-        }
-
-        .aggressive-btn {
-          width: 100%;
-          padding: 18px !important;
-          border-radius: var(--radius-button);
-          font-size: 0.95rem !important;
-          position: relative;
-          overflow: hidden;
-          font-weight: 900;
-        }
-
-        .timer-notice {
-          font-size: 0.65rem;
-          color: #ff4444;
-          text-align: center;
-          font-weight: 700;
-          margin: 0;
-        }
+        .submit-btn:hover { background: var(--gold-muted); }
+        .submit-btn .arrow { margin-left: 16px; transition: transform 0.3s; }
+        .submit-btn:hover .arrow { transform: translateX(5px); }
 
         .form-footer {
-          padding: 15px 30px;
-          text-align: center;
-          background: #fcfcfc;
-          border-top: 1px solid #eee;
-          font-size: 0.65rem;
-          color: #999;
+           margin-top: 56px;
+           padding-top: 24px;
+           border-top: 1px solid rgba(3, 3, 3, 0.05);
+           text-align: center;
         }
 
-        .mobile-bottom-bar {
-          display: none;
+        .form-footer p {
+           font-size: 10px;
+           letter-spacing: 0.2em;
+           font-weight: 500;
+           color: rgba(3, 3, 3, 0.3);
+           text-transform: uppercase;
+           font-style: italic;
         }
 
-        @media (max-width: 1024px) {
-          .lead-card {
-            height: auto;
-            border-bottom: 1px solid var(--accent);
-            overflow: visible;
-          }
-          
-          .mobile-bottom-bar {
-            display: flex;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 5000;
-            height: 60px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-          }
-
-          .bottom-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 0.75rem;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-          }
-
-          .whatsapp-btn {
-            background: #25d366;
-          }
-
-          .enquiry-btn {
-            background: var(--cta-accent);
-          }
-
-          .btn-icon {
-            font-size: 1.1rem;
-          }
+        @keyframes reveal {
+           from { opacity: 0; transform: translateY(10px); }
+           to { opacity: 1; transform: translateY(0); }
         }
 
-        .whatsapp-float {
-          position: fixed;
-          bottom: 30px;
-          left: 30px;
-          background: #25d366;
-          color: white;
-          padding: 8px 18px;
-          border-radius: 50px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          text-decoration: none;
-          font-weight: 800;
-          font-size: 0.8rem;
-          letter-spacing: 0.5px;
-          z-index: 9999;
-          box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-          animation: breathe 3s infinite;
-          transition: var(--transition-smooth);
-        }
-
-        .whatsapp-float:hover {
-          transform: scale(1.05);
-          background: #128c7e;
-        }
-
-        .whatsapp-icon {
-          font-size: 1.2rem;
-        }
-
-        @media (max-width: 1024px) {
-          .desktop-only {
-            display: none !important;
-          }
+        @media (max-width: 768px) {
+           .lead-form-container { padding: 40px 24px; }
+           .form-row { grid-template-columns: 1fr; gap: 40px; }
+           .form-header h3 { font-size: 42px; }
         }
       `}</style>
-    </>
+    </div>
   );
 };
 

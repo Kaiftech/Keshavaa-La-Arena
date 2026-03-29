@@ -8,124 +8,105 @@ const Footer = () => {
   return (
     <footer className="footer-section">
       <div className="container">
-        <div className="footer-top">
-          <div className="branding">
-            <Image 
-              src="/assets/KESHAVAA LOGO.webp" 
-              alt="Keshavaa Properties" 
-              width={220} 
-              height={80} 
-            />
-            <p>Luxury residential project developers dedicated to creating world-class living spaces in Goa.</p>
+        <div className="footer-grid">
+          <div className="footer-brand reveal">
+            <div className="logo-wrap">
+              <Image 
+                src="/assets/KESHAVAA LOGO.webp" 
+                alt="Keshavaa Luxury" 
+                width={160} 
+                height={55} 
+                className="invert"
+              />
+            </div>
+            <h3 className="brand-statement">Crafting <span>Legacies</span> <br/>In Nerul, Goa.</h3>
           </div>
-          <div className="links">
-            <h4 className="font-luxury">Quick Links</h4>
-            <ul>
-              <li><Link href="#hero">Overview</Link></li>
-              <li><Link href="#gallery">Gallery</Link></li>
-              <li><Link href="#floorplans">Floor Plans</Link></li>
-              <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+          
+          <div className="footer-nav reveal" style={{ animationDelay: '0.1s' }}>
+            <span className="label">NAVIGATE</span>
+            <ul className="footer-links">
+              <li><Link href="#hero">Collection</Link></li>
+              <li><Link href="#amenities">Lifestyle</Link></li>
+              <li><Link href="#gallery">Archive</Link></li>
             </ul>
           </div>
-          <div className="contact">
-            <h4 className="font-luxury">Corporate Office</h4>
-            <p>Goa, India</p>
-            <p>+91 123 456 7890</p>
-            <p>sales@keshavaa-properties.site</p>
+          
+          <div className="footer-legal reveal" style={{ animationDelay: '0.2s' }}>
+            <span className="label">CONTACT</span>
+            <div className="legal-data">
+              <p>Nerul Riviera, Goa</p>
+              <p>sales@keshavaa-properties.site</p>
+              <div className="cta-area">
+                 <a href="#enquire" className="footer-btn">Get In Touch</a>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} Keshavaa Properties. All rights reserved.</p>
-          <p>MahaRERA Registration No: PXXXXXXXX</p>
+
+        <div className="copyright reveal" style={{ animationDelay: '0.3s' }}>
+          <span>© {new Date().getFullYear()} Keshavaa Developers.</span>
+          <span>MAHARERA: PXXXXXXXX</span>
         </div>
       </div>
 
       <style jsx>{`
         .footer-section {
-          background: #ffffff;
-          color: var(--secondary);
-          padding: 100px 0 40px;
-          border-top: 1px solid #f0f0f0;
+           background: var(--bg-deep);
+           padding: 100px 0 60px;
+           color: #fff;
+        }
+        .footer-grid {
+           display: grid; grid-template-columns: 2fr 1fr 1fr;
+           gap: 80px; margin-bottom: 80px;
         }
 
-        .footer-top {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
-          gap: 60px;
-          border-bottom: 1px solid #f0f0f0;
-          padding-bottom: 60px;
+        .brand-statement {
+           font-family: var(--font-playfair); font-size: 32px;
+           line-height: 1.2; font-weight: 400; color: #fff;
+           margin-top: 30px;
+        }
+        .brand-statement span { font-style: italic; color: var(--accent-primary); }
+
+        .label {
+           display: block; font-family: var(--font-inter); font-size: 10px;
+           font-weight: 800; letter-spacing: 4px; color: var(--accent-primary);
+           margin-bottom: 25px; text-transform: uppercase;
         }
 
-        .branding p {
-          margin-top: 30px;
-          font-size: 0.95rem;
-          color: var(--text-muted);
-          line-height: 1.8;
-          max-width: 400px;
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links :global(a) {
+           color: rgba(255,255,255,0.6) !important; text-decoration: none !important;
+           font-family: var(--font-inter); font-size: 13px; transition: color 0.3s;
+        }
+        .footer-links :global(a:hover) { color: var(--accent-primary) !important; }
+
+        .legal-data p {
+           font-family: var(--font-inter); font-size: 14px;
+           color: rgba(255,255,255,0.6); margin-bottom: 10px;
         }
 
-        h4 {
-          font-size: 0.85rem;
-          margin-bottom: 25px;
-          color: var(--primary);
-          letter-spacing: 2px;
-          text-transform: uppercase;
+        .cta-area { margin-top: 25px; }
+        .footer-btn {
+           background: var(--accent-primary); color: var(--bg-deep);
+           padding: 12px 24px; border-radius: 4px; text-decoration: none;
+           font-family: var(--font-inter); font-size: 10px; font-weight: 900;
+           letter-spacing: 2px; text-transform: uppercase; transition: transform 0.3s;
+           display: inline-block;
+        }
+        .footer-btn:hover { transform: translateY(-3px); background: #fff; }
+
+        .copyright {
+           padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+           display: flex; justify-content: space-between;
+           font-family: var(--font-inter); font-size: 10px; font-weight: 800;
+           letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3);
         }
 
-        .links ul {
-          list-style: none;
-        }
-
-        .links li {
-          margin-bottom: 15px;
-        }
-
-        .links a {
-          color: var(--secondary);
-          transition: var(--transition-fast);
-          font-size: 0.9rem;
-          font-weight: 500;
-          opacity: 0.7;
-        }
-
-        .links a:hover {
-          color: var(--primary);
-          opacity: 1;
-        }
-
-        .contact p {
-          margin-bottom: 15px;
-          color: var(--text-muted);
-          font-size: 0.9rem;
-        }
-
-        .footer-bottom {
-          padding-top: 40px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 0.8rem;
-          color: #bbb;
-          letter-spacing: 1px;
-        }
-
-        @media (max-width: 1024px) {
-          .footer-section {
-             padding: 60px 0 40px;
-          }
-          
-          .footer-top {
-            grid-template-columns: 1fr;
-            gap: 40px;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .footer-bottom {
-            flex-direction: column;
-            gap: 15px;
-            text-align: center;
-          }
+        @media (max-width: 768px) {
+           .footer-grid { grid-template-columns: 1fr; gap: 50px; }
+           .copyright { flex-direction: column; gap: 15px; text-align: center; }
+           .brand-statement { font-size: 26px; }
         }
       `}</style>
     </footer>

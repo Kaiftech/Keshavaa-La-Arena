@@ -9,115 +9,88 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-      <div className="header-container">
-        <div className="logo">
-          <a href="#hero">
-            <Image 
-              src="/assets/KESHAVAA LOGO.webp" 
-              alt="Keshavaa Properties" 
-              width={140} 
-              height={45} 
-              priority
-            />
-          </a>
-        </div>
+    <header className={`modern-header ${scrolled ? 'scrolled' : ''}`}>
+      <div className="container header-inner">
+        <Link href="/" className="logo-wrap">
+          <Image 
+            src="/assets/KESHAVAA LOGO.webp" 
+            alt="Keshavaa Luxury" 
+            width={130} 
+            height={45} 
+            priority
+            className={`${!scrolled ? 'invert' : ''}`}
+          />
+        </Link>
         
-        <nav className="desktop-nav">
-          <ul>
-            <li><a href="#hero">OVERVIEW</a></li>
-            <li><a href="#specs">SPECS</a></li>
-            <li><a href="#amenities">AMENITIES</a></li>
-            <li><a href="#gallery">GALLERY</a></li>
-            <li><a href="#floorplans">FLOOR PLANS</a></li>
-          </ul>
+        <nav className="nav-menu">
+          <Link href="#hero">COLLECTION</Link>
+          <div className="dot" />
+          <Link href="#amenities">LIFESTYLE</Link>
+          <div className="dot" />
+          <Link href="#gallery">ARCHIVE</Link>
+          <div className="dot" />
+          <Link href="#floorplans">LAYOUTS</Link>
         </nav>
 
-        <a href="#lead-form" className="btn-premium mobile-hide">GET BROCHURE</a>
+        <div className="header-actions">
+           <a href="#enquire" className="btn-header">SECURE ACCESS</a>
+        </div>
       </div>
 
       <style jsx>{`
-        .header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: calc(100% - var(--sidebar-width));
-          z-index: 1000;
-          height: 80px;
-          display: flex;
-          align-items: center;
-          transition: var(--transition-smooth);
-          background: #ffffff;
-          border-bottom: 1px solid #f0f0f0;
+        .modern-header {
+           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+           padding: 40px 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .modern-header.scrolled {
+           padding: 15px 0; background: rgba(255, 255, 255, 0.9);
+           backdrop-filter: blur(25px); border-bottom: 1px solid rgba(32, 178, 170, 0.08);
+           box-shadow: 0 5px 30px rgba(8, 22, 23, 0.03);
+        }
+        .header-inner {
+           display: flex; align-items: center; justify-content: space-between;
         }
 
-        .header.scrolled {
-          height: 70px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-          border-bottom: 2px solid var(--primary);
+        .logo-wrap { transition: transform 0.4s; }
+        .logo-wrap:hover { transform: scale(1.05); }
+
+        .nav-menu {
+           display: flex; gap: 30px; align-items: center;
+        }
+        .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent-primary); opacity: 0.3; }
+
+        .nav-menu :global(a) {
+           font-family: var(--font-inter); font-size: 9px; font-weight: 800;
+           letter-spacing: 0.4em; text-transform: uppercase; text-decoration: none;
+           color: ${scrolled ? 'var(--text-primary)' : '#ffffff'};
+           transition: color 0.4s, opacity 0.4s;
+           opacity: 0.6;
+        }
+        .nav-menu :global(a:hover) {
+           color: var(--accent-primary); opacity: 1;
         }
 
-        .header-container {
-          width: 100%;
-          max-width: 1400px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 4%; /* Slightly less padding to gain more space */
+        .btn-header {
+           background: ${scrolled ? 'var(--bg-deep)' : 'var(--accent-primary)'};
+           color: #fff; padding: 12px 24px; border-radius: 4px; border: none;
+           font-family: var(--font-inter); font-size: 9px; font-weight: 900;
+           letter-spacing: 0.3em; text-decoration: none; transition: all 0.3s;
+           text-transform: uppercase;
         }
-
-        .desktop-nav ul {
-          display: flex;
-          list-style: none;
-          gap: 20px; /* Reduced gap from 35px */
-        }
-
-        .desktop-nav a {
-          font-weight: 700;
-          text-transform: uppercase;
-          font-size: 0.65rem; /* Slightly smaller for better fit */
-          letter-spacing: 1.5px;
-          color: var(--secondary);
-          transition: var(--transition-fast);
-          opacity: 0.7;
-          text-decoration: none;
-          white-space: nowrap; /* Prevent "FLOOR PLANS" from wrapping */
-        }
-
-        .desktop-nav a:hover {
-          color: var(--primary);
-          opacity: 1;
-        }
-
-        .mobile-hide {
-          white-space: nowrap; /* Prevent "GET BROCHURE" from wrapping */
-          flex-shrink: 0;
+        .btn-header:hover {
+           background: var(--accent-glow); transform: translateY(-2px);
+           box-shadow: 0 5px 15px rgba(32, 178, 170, 0.2);
         }
 
         @media (max-width: 1024px) {
-          .header {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-          }
-          
-          .desktop-nav, .mobile-hide {
-            display: none;
-          }
-
-          .logo {
-            transform: scale(0.9);
-          }
+           .nav-menu { display: none; }
         }
       `}</style>
     </header>

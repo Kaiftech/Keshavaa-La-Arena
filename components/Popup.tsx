@@ -1,233 +1,140 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 const Popup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '' });
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 2000);
+    // Initial check for hash
+    if (window.location.hash === '#enquire') setIsVisible(true);
 
-    const handleGlobalClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      
-      // If clicking inside the popup or on the close button, don't re-trigger it
-      if (target.closest('.popup-content') || target.closest('.close-btn')) return;
-      
-      // Only trigger on "Interactive" or "High Intent" elements
-      // 1. Buttons and Links
-      // 2. Property Cards (Specs, Amenities, Floor Plans)
-      const isInteractive = 
-        target.closest('button') || 
-        target.closest('a') || 
-        target.closest('.spec-card') || 
-        target.closest('.amenity-card') || 
-        target.closest('.plan-card');
-      if (isInteractive) {
+    const checkHash = () => {
+      if (window.location.hash === '#enquire') {
         setIsVisible(true);
+      } else {
+        setIsVisible(false);
       }
     };
 
-    document.addEventListener('click', handleGlobalClick);
-
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener('click', handleGlobalClick);
-    };
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
   }, []);
 
-  const closePopup = (e?: React.MouseEvent) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  const closePopup = () => {
     setIsVisible(false);
+    window.history.replaceState(null, '', ' '); // Clear hash
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Popup Form Submitted:', formData);
-    window.location.href = '/thank-you';
+    setSubmitted(true);
+    setTimeout(() => {
+       setSubmitted(false);
+       closePopup();
+    }, 2000);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="popup-overlay">
-      <div className="popup-content">
-        <button className="close-btn" onClick={closePopup}>×</button>
-        
-        <div className="popup-left">
-           <Image 
-             src="/assets/KESHAVAA LOGO.webp" 
-             alt="Keshavaa logo" 
-             width={180} 
-             height={60}
-             className="popup-logo"
-           />
-           <h2 className="font-luxury">LA ARENA</h2>
-           <p className="popup-subtitle">Luxury Residential Nerul, Goa</p>
-           
-           <ul className="popup-features">
-             <li>✓ Limited Time Opportunity</li>
-             <li>✓ High ROI Investment Potential</li>
-             <li>✓ Best Rental Yields in Goa</li>
-           </ul>
-        </div>
-
-        <div className="popup-right">
-          <h3>Register Now</h3>
-          <p>Get exclusive access to pricing & floor plans.</p>
-          
-          <form onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              placeholder="Full Name" 
-              required 
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
-            />
-            <input 
-              type="tel" 
-              placeholder="Phone Number" 
-              required 
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-            />
-            <button type="submit" className="btn-premium aggressive-btn">
-              GET BROCHURE NOW
-            </button>
-          </form>
-        </div>
+    <div className="compact-overlay">
+      <div className="backdrop" onClick={closePopup} />
+      <div className="compact-modal">
+        <button className="close-trigger" onClick={closePopup}>✕</button>
+        {submitted ? (
+          <div className="success">
+            <h3>Thank You.</h3>
+            <p>Our concierge will reach out instantly.</p>
+          </div>
+        ) : (
+          <div className="form-content">
+            <div className="header">
+               <h2>Direct <span>Enquiry.</span></h2>
+               <p>Quick access to floor plans and pricing.</p>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="field">
+                <input 
+                  type="text" 
+                  placeholder="Full Name" 
+                  required 
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+              <div className="field">
+                <input 
+                  type="tel" 
+                  placeholder="Mobile Number" 
+                  required 
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                />
+              </div>
+              <button type="submit">Unlock Access</button>
+            </form>
+          </div>
+        )}
       </div>
 
       <style jsx>{`
-        .popup-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.85);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 5000;
-          padding: 20px;
-          backdrop-filter: blur(10px);
-        }
-
-        .popup-content {
-          background: white;
-          width: 100%;
-          max-width: 850px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          position: relative;
-          border-radius: var(--radius-squircle, 40px);
-          overflow: hidden;
-          box-shadow: 0 30px 100px rgba(0,0,0,0.5);
-          animation: popupScale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes popupScale {
-          from { transform: scale(0.9); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-
-        .close-btn {
-          position: absolute;
-          top: 15px;
-          right: 20px;
-          background: none;
-          border: none;
-          font-size: 2rem;
-          cursor: pointer;
-          color: #999;
-          z-index: 10;
-        }
-
-        .popup-left {
-          background: var(--secondary);
-          color: white;
-          padding: 60px 40px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .popup-logo {
-          margin-bottom: 30px;
-          filter: brightness(0) invert(1);
-        }
-
-        .popup-subtitle {
-          color: var(--primary);
-          font-weight: 700;
-          letter-spacing: 2px;
-          font-size: 0.8rem;
-          text-transform: uppercase;
-        }
-
-        .popup-features {
-          list-style: none;
-          padding: 0;
-          margin-top: 40px;
-          text-align: left;
-        }
-
-        .popup-features li {
-          font-size: 0.9rem;
-          margin-bottom: 12px;
-          font-weight: 600;
-        }
-
-        .popup-right {
-          padding: 60px 40px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-
-        .popup-right h3 {
-          font-size: 2rem;
-          margin-bottom: 10px;
-        }
-
-        .popup-right p {
-          color: var(--text-muted);
-          margin-bottom: 30px;
-        }
-
-        input {
-          width: 100%;
+        .compact-overlay {
+          position: fixed; inset: 0; z-index: 99999;
+          display: flex; align-items: center; justify-content: center;
           padding: 15px;
-          margin-bottom: 15px;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-family: inherit;
         }
-
-        .aggressive-btn {
-          width: 100%;
-          animation: pulse 2s infinite;
+        .backdrop {
+           position: absolute; inset: 0;
+           background: rgba(8, 22, 23, 0.8);
+           backdrop-filter: blur(12px);
         }
-
-        @keyframes pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.03); }
-          100% { transform: scale(1); }
+        .compact-modal {
+           position: relative;
+           background: #ffffff;
+           width: 100%; max-width: 400px;
+           padding: 40px;
+           border-radius: 12px;
+           box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+           animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .close-trigger {
+           position: absolute; top: 15px; right: 15px;
+           border: none; background: none; font-size: 18px; color: var(--text-secondary);
+           cursor: pointer; padding: 5px;
+        }
+        .header { margin-bottom: 25px; text-align: center; }
+        .header h2 { font-family: var(--font-inter); font-size: 26px; font-weight: 300; }
+        .header h2 span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
+        .header p { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
+        
+        form { display: flex; flex-direction: column; gap: 15px; }
+        .field input {
+           width: 100%; padding: 15px;
+           background: #f8f8f8; border: 1px solid #eee;
+           border-radius: 8px; font-family: var(--font-inter); font-size: 15px;
+           outline: none; transition: border-color 0.3s;
+        }
+        .field input:focus { border-color: var(--accent-primary); }
+        
+        button {
+           background: var(--bg-deep); color: white;
+           padding: 16px; border: none; border-radius: 8px;
+           font-family: var(--font-inter); font-weight: 700; font-size: 13px;
+           text-transform: uppercase; letter-spacing: 2px;
+           cursor: pointer; transition: background 0.3s; margin-top: 10px;
+        }
+        button:hover { background: var(--accent-primary); }
 
-        @media (max-width: 768px) {
-          .popup-content {
-            grid-template-columns: 1fr;
-          }
-          .popup-left {
-            display: none;
-          }
+        .success { text-align: center; padding: 20px 0; }
+        .success h3 { font-family: var(--font-inter); font-size: 24px; margin-bottom: 10px; color: var(--accent-primary); }
+        .success p { font-size: 14px; color: var(--text-secondary); }
+
+        @keyframes popIn {
+           from { opacity: 0; transform: scale(0.95) translateY(10px); }
+           to { opacity: 1; transform: scale(1) translateY(0); }
         }
       `}</style>
     </div>

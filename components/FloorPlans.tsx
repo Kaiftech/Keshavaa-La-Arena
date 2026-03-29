@@ -5,38 +5,60 @@ import Image from 'next/image';
 
 const FloorPlans = () => {
   const plans = [
-    { title: 'Typical Floor Plan', src: '/assets/floor plan.jpg' },
-    { title: 'Penthouse Floor Plan', src: '/assets/floor plan penthouse.jpg' },
-    { title: 'Attic Floor Plan', src: '/assets/floor plan attic.jpg' }
+    { 
+      type: 'Bespoke Residence', 
+      area: '3,200 SQ. FT.', 
+      img: '/assets/floor plan.jpg',
+      desc: 'An expansive layout designed for fluid movement between the private riverfront deck and the grand atrium.'
+    },
+    { 
+      type: 'The Penthouse', 
+      area: '4,500 SQ. FT.', 
+      img: '/assets/floor plan penthouse.jpg',
+      desc: 'Elevated luxury with panoramic views of the Nerul River, featuring a private rooftop meditation garden.'
+    },
+    { 
+      type: 'Attic Collection', 
+      area: '2,800 SQ. FT.', 
+      img: '/assets/floor plan attic.jpg',
+      desc: 'A masterclass in spatial design, harmonizing heritage Goan geometry with modern technical precision.'
+    },
   ];
-
-  const handlePlanClick = (e: React.MouseEvent) => {
-    // Popup.tsx global listener handles transitions
-  };
 
   return (
     <section id="floorplans" className="floorplans-section">
-      <div className="container">
-        <h2 className="title-underline">Tailored Living Spaces</h2>
-        <p className="section-description">Meticulously designed layouts for a bespoke lifestyle. Click any plan to enquire.</p>
-        
-        <div className="plans-grid">
+      <div className="container floorplans-container">
+        <div className="floorplans-header">
+           <div className="title-area">
+             <span className="eyebrow">TECHNICAL PRECISION</span>
+             <h2 className="title">
+                Architectural <span>Layouts.</span>
+             </h2>
+           </div>
+           <p className="desc">Bespoke spatial design optimized for the Nerul riverfront.</p>
+        </div>
+
+        <div className="floorplans-grid">
           {plans.map((plan, i) => (
-            <div key={i} className="plan-card animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-              <div className="plan-image-container" onClick={handlePlanClick}>
+            <div key={i} className="floorplan-card">
+              <a href="#enquire" className="plan-visual">
                 <Image 
-                  src={plan.src} 
-                  alt={`${plan.title} - La Arena Goa Layout`} 
+                  src={plan.img} 
+                  alt={plan.type} 
                   fill
-                  style={{ objectFit: 'cover' }}
-                  className="blur-image"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{ objectFit: 'contain' }}
+                  className="floor-img"
                 />
-                <div className="view-overlay">
-                  <button className="btn-premium btn-view">CLICK HERE TO VIEW</button>
+              </a>
+
+              <div className="floorplan-info">
+                <span className="area">{plan.area}</span>
+                <h3 className="type">{plan.type}</h3>
+                <p className="summary">{plan.desc}</p>
+                <div className="action">
+                   <a href="#enquire" className="unlock-btn">Enquire for Blueprint</a>
                 </div>
               </div>
-              <h4 className="font-luxury">{plan.title}</h4>
             </div>
           ))}
         </div>
@@ -44,80 +66,69 @@ const FloorPlans = () => {
 
       <style jsx>{`
         .floorplans-section {
-          background: #ffffff;
-          text-align: center;
+           background: #ffffff;
+           padding: 60px 0;
+           border-top: 1px solid var(--border-subtle);
+        }
+        .floorplans-header {
+           display: flex; justify-content: space-between; align-items: flex-end;
+           margin-bottom: 40px;
+        }
+        .eyebrow {
+           display: block; font-family: var(--font-inter); font-size: 11px; font-weight: 800;
+           letter-spacing: 0.6em; color: var(--accent-primary); margin-bottom: 15px;
+        }
+        .title {
+           font-family: var(--font-inter); font-size: 52px; font-weight: 300;
+           line-height: 1.1; color: var(--text-primary); letter-spacing: -2px;
+        }
+        .title span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
+        .desc { font-family: var(--font-inter); font-size: 14px; color: var(--text-secondary); max-width: 300px; text-align: right; }
+
+        .floorplans-grid {
+           display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
         }
 
-        .section-description {
-          color: var(--text-muted);
-          max-width: 600px;
-          margin: 0 auto 50px;
+        .plan-visual {
+           position: relative; width: 100%; height: 300px;
+           background: #ffffff; border-radius: 8px; margin-bottom: 25px;
+           border: 1px solid #f2f2f2; display: block; overflow: hidden;
+           cursor: pointer; text-decoration: none;
+        }
+        .plan-visual :global(.floor-img) {
+           filter: blur(1.5px) contrast(1.05) opacity(0.85);
+           transition: all 0.5s ease;
+           transform: scale(0.98);
+        }
+        .plan-visual:hover :global(.floor-img) {
+           filter: blur(0px) contrast(1.1) opacity(1); transform: scale(1.02);
         }
 
-        .plans-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 20px;
-          margin-top: 40px;
+        .floorplan-info { text-align: center; }
+        .area {
+           display: block; font-family: var(--font-inter); font-size: 10px; font-weight: 800;
+           letter-spacing: 4px; color: var(--accent-primary); margin-bottom: 10px;
+           text-transform: uppercase;
         }
-
-        .plan-card {
-           border-radius: var(--radius-squircle, 24px);
-           overflow: hidden;
-           background: #fff;
-           transition: var(--transition-smooth);
-           box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-           border: 1px solid #f0f0f0;
+        .type {
+           font-family: var(--font-playfair); font-size: 24px; line-height: 1.2;
+           color: var(--text-primary); margin-bottom: 10px; font-style: italic;
         }
-
-        .plan-image-container {
-          position: relative;
-          height: 350px;
-          cursor: pointer;
-          background: #fcfcfc;
-          overflow: hidden;
+        .summary { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 0 10px; }
+        .action { margin-top: 20px; }
+        .unlock-btn {
+           font-family: var(--font-inter); font-size: 10px; font-weight: 900;
+           letter-spacing: 3px; text-transform: uppercase; color: var(--text-primary);
+           text-decoration: none; border-bottom: 2px solid var(--accent-primary);
+           padding-bottom: 4px; transition: all 0.3s;
         }
+        .unlock-btn:hover { background: var(--accent-primary); color: #fff; padding: 4px 10px; border-radius: 4px; }
 
-        .plan-image-container :global(.blur-image) {
-          filter: blur(10px); /* Visible like 20% as requested */
-          transition: var(--transition-smooth);
-        }
-
-        .plan-image-container:hover :global(.blur-image) {
-          transform: scale(1.05);
-        }
-
-        .view-overlay {
-          position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 10;
-        }
-
-        .btn-view {
-          padding: 14px 28px !important;
-          animation: breathe 3s infinite;
-          background: var(--cta-accent) !important;
-          border-radius: var(--radius-button) !important;
-          font-size: 0.75rem !important;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-        }
-
-        h4 {
-          padding: 25px 20px;
-          font-size: 1.1rem;
-          color: var(--secondary);
-          margin: 0;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-        }
-
-        @media (max-width: 768px) {
-          .plan-image-container {
-            height: 350px;
-          }
+        @media (max-width: 1024px) {
+           .title { font-size: 40px; }
+           .floorplans-grid { grid-template-columns: 1fr; gap: 40px; }
+           .floorplans-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+           .desc { text-align: left; }
         }
       `}</style>
     </section>

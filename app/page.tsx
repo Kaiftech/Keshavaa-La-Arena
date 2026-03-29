@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import LeadForm from "@/components/LeadForm";
+import BrandStatement from "@/components/BrandStatement";
 import Specs from "@/components/Specs";
 import Amenities from "@/components/Amenities";
 import Gallery from "@/components/Gallery";
@@ -10,25 +10,31 @@ import Popup from "@/components/Popup";
 
 export default function Home() {
   return (
-    <div className="app-layout">
+    <main className="app-layout">
+      {/* Essential Modern Pop-up - Triggered by user intent */}
       <Popup />
-      <div className="content-column">
-        <Header />
-        <Hero />
-        <div className="main-content-wrapper">
-          <Specs />
-          <Gallery />
-          <FloorPlans />
-          <Amenities />
-        </div>
-        <Footer />
-      </div>
       
-      <aside className="form-column">
-        <LeadForm />
-      </aside>
-      {/* Invisible Grid Reservation to protect content from sliding behind form */}
-      <div className="grid-reservation mobile-hide"></div>
-    </div>
+      <Header />
+      
+      {/* High-Impact Turquoise-Noir Hero */}
+      <Hero />
+      
+      {/* Heritage & Brand Highlights */}
+      <BrandStatement />
+      
+      {/* Lifestyle & Architecture Narrative */}
+      <Amenities />
+      
+      {/* Visual Archive */}
+      <Gallery />
+      
+      {/* Technical Layouts - Gated High-Res Unlock */}
+      <FloorPlans />
+      
+      {/* Refined Technical Finishes */}
+      <Specs />
+
+      <Footer />
+    </main>
   );
 }

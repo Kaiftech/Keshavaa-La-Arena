@@ -4,100 +4,138 @@ import React from 'react';
 import Image from 'next/image';
 
 const Amenities = () => {
-  const amenities = [
-    { title: 'River Facing', image: '/assets/amenity-river.png', desc: 'Serene views of the Nerul river' },
-    { title: 'Rooftop Infinity Pool', image: '/assets/amenity-pool.png', desc: 'Panoramic sky-high relaxation' },
-    { title: 'Fitness Centre', image: '/assets/amenity-gym.png', desc: 'State-of-the-art wellness facility' },
-    { title: 'Kids\' Play Lounge', image: '/assets/amenity-kids.png', desc: 'Secure and world-class play area' },
-    { title: 'Jacuzzi Spa', image: '/assets/amenity-jacuzzi.png', desc: 'Private bubbles of luxury' },
-    { title: 'Dedicated Parking', image: '/assets/amenity-parking.png', desc: 'Ample secure parking space' },
-    { title: '24/7 Security', image: '/assets/amenity-security.png', desc: 'Smart AI-driven security systems' }
+  const items = [
+    { 
+      title: 'Turquoise <span>Infinity</span>', 
+      subtitle: 'ROOFTOP POOL', 
+      img: '/assets/amenity-pool.png',
+      desc: 'Flowing uninterrupted sunsets over the coastline.'
+    },
+    { 
+      title: 'River <span>Sanctuary</span>', 
+      subtitle: 'PRIVATE DOCK', 
+      img: '/assets/amenity-river.png',
+      desc: 'Exclusive access to the serene riverfront.'
+    },
+    { 
+      title: 'Wellness <span>Spa</span>', 
+      subtitle: 'JACUZZI', 
+      img: '/assets/amenity-gym.png',
+      desc: 'Sanctuary designed for rejuvenation.'
+    },
   ];
 
   return (
     <section id="amenities" className="amenities-section">
+      <div className="side-line left" />
+      <div className="side-line right" />
+
       <div className="container">
-        <h2 className="title-underline">Modern Amenities</h2>
+        <div className="amenities-header">
+           <div className="title-area">
+             <span className="eyebrow">SIGNATURE LIFESTYLE</span>
+             <h2 className="title">
+                Curated <span>Living.</span>
+             </h2>
+           </div>
+           <div className="header-detail">
+             <span className="num">003</span>
+             <p className="desc-text">Refined details honoring the Keshavaa legacy.</p>
+           </div>
+        </div>
+
         <div className="amenities-grid">
-          {amenities.map((amenity, i) => (
-            <article key={i} className="amenity-card animate-fade-up" style={{ animationDelay: `${i * 0.1}s` }}>
-              <div className="amenity-image">
-                <Image 
-                  src={amenity.image} 
-                  alt={`${amenity.title} - Luxury Amenity at La Arena Nerul`}
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+          {items.map((item, i) => (
+            <div key={i} className="amenity-card">
+              <div className="img-wrap">
+                <Image src={item.img} alt={item.subtitle} fill style={{ objectFit: 'cover' }} className="amenity-img" />
+                <div className="img-overlay" />
+                <span className="card-num">{i + 1}</span>
               </div>
-              <div className="amenity-info">
-                <h4 className="font-luxury">{amenity.title}</h4>
-                <p>{amenity.desc}</p>
+              <div className="content">
+                <span className="subtitle">{item.subtitle}</span>
+                <h3 className="card-title" dangerouslySetInnerHTML={{ __html: item.title }}></h3>
+                <p className="card-desc">{item.desc}</p>
               </div>
-            </article>
+            </div>
           ))}
         </div>
       </div>
 
       <style jsx>{`
         .amenities-section {
-          background: #ffffff;
+           background: var(--bg-creme);
+           padding: 100px 0;
+           position: relative;
+           border-bottom: 1px solid var(--border-subtle);
         }
+
+        .side-line {
+           position: absolute; top: 0; bottom: 0; width: 1px; background: var(--accent-primary); opacity: 0.1;
+        }
+        .left { left: 5%; }
+        .right { right: 5%; }
+
+        .amenities-header {
+           display: flex; justify-content: space-between; align-items: flex-end;
+           margin-bottom: 60px;
+        }
+
+        .eyebrow {
+           display: block; font-family: var(--font-inter); font-size: 11px;
+           font-weight: 800; letter-spacing: 0.8em; color: var(--accent-primary);
+           margin-bottom: 20px;
+        }
+
+        .title {
+           font-family: var(--font-inter); font-size: 58px; font-weight: 300;
+           line-height: 1.1; color: var(--text-primary); letter-spacing: -3px;
+        }
+        .title span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
+
+        .header-detail { display: flex; align-items: flex-start; gap: 20px; text-align: right; }
+        .num { font-size: 12px; font-weight: 800; color: var(--accent-primary); opacity: 0.3; font-family: var(--font-inter); }
+        .desc-text { font-family: var(--font-inter); font-size: 15px; color: var(--text-secondary); max-width: 250px; }
 
         .amenities-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-          margin-top: 50px;
+           display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
         }
 
-        .amenity-card {
-          background: #fff;
-          border-radius: var(--radius-squircle, 32px);
-          overflow: hidden;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-          transition: var(--transition-smooth);
+        .img-wrap {
+           position: relative; width: 100%; height: 320px;
+           overflow: hidden; border-radius: 4px; margin-bottom: 30px;
+           border: 1px solid var(--border-subtle);
+        }
+        .img-overlay { position: absolute; inset: 0; background: rgba(8, 22, 23, 0.05); z-index: 10; transition: background 0.4s; }
+        .amenity-card:hover .img-overlay { background: rgba(8, 22, 23, 0); }
+
+        .card-num {
+           position: absolute; top: 20px; right: 20px; z-index: 20;
+           font-family: var(--font-playfair); font-size: 20px; font-style: italic; color: #fff;
+           opacity: 0.5;
         }
 
-        .amenity-card:hover {
-          transform: translateY(-10px);
-          border-bottom-color: var(--primary);
-        }
+        .amenity-img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .amenity-card:hover .amenity-img { transform: scale(1.08); }
 
-        .amenity-image {
-          position: relative;
-          height: 250px;
-          overflow: hidden;
+        .subtitle {
+           display: block; font-family: var(--font-inter); font-size: 10px;
+           font-weight: 800; letter-spacing: 0.4em; color: var(--accent-primary);
+           margin-bottom: 12px; text-transform: uppercase;
         }
-
-        .amenity-image :global(img) {
-          transition: transform 0.6s ease;
+        .card-title {
+           font-family: var(--font-playfair); font-size: 26px; color: var(--text-primary);
+           margin-bottom: 15px; line-height: 1.2;
         }
+        .card-title :global(span) { font-style: italic; color: var(--accent-primary); }
+        .card-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; opacity: 0.7; }
 
-        .amenity-card:hover .amenity-image :global(img) {
-          transform: scale(1.1);
-        }
-
-        .amenity-info {
-          padding: 30px;
-        }
-
-        h4 {
-          font-size: 1.3rem;
-          color: var(--secondary);
-          margin-bottom: 8px;
-        }
-
-        p {
-          font-size: 0.9rem;
-          color: var(--text-muted);
-          line-height: 1.5;
-        }
-
-        @media (max-width: 600px) {
-          .amenities-grid {
-            grid-template-columns: 1fr;
-          }
+        @media (max-width: 1024px) {
+           .title { font-size: 45px; }
+           .amenities-grid { grid-template-columns: 1fr; gap: 60px; }
+           .amenities-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+           .header-detail { text-align: left; }
+           .side-line { display: none; }
         }
       `}</style>
     </section>
