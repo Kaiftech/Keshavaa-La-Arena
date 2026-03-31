@@ -24,7 +24,7 @@ const ProjectMetrics = () => {
           <div className="v-divider" />
           <div className="metric-item">
             <span className="label">Signature Features</span>
-            <span className="value">PRIVATE JACUZZI</span>
+            <span className="value">PRIVATE JACUZZI HOMES</span>
           </div>
         </div>
       </div>

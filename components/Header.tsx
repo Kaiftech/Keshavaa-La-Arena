@@ -20,12 +20,11 @@ const Header = () => {
       <div className="container header-inner">
         <Link href="/" className="logo-wrap">
           <Image 
-            src="/assets/KESHAVAA LOGO.webp" 
+            src="/assets/keshavaa.blue1.png" 
             alt="Keshavaa Luxury" 
             width={130} 
             height={45} 
             priority
-            className={`${!scrolled ? 'invert' : ''}`}
           />
         </Link>
         

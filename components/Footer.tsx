@@ -12,11 +12,10 @@ const Footer = () => {
           <div className="footer-brand reveal">
             <div className="logo-wrap">
               <Image 
-                src="/assets/KESHAVAA LOGO.webp" 
+                src="/assets/keshavaa.blue1.png" 
                 alt="Keshavaa Luxury" 
                 width={160} 
                 height={55} 
-                className="invert"
               />
             </div>
             <h3 className="brand-statement">Crafting <span>Legacies</span> <br/>In Nerul, Goa.</h3>
