@@ -7,19 +7,19 @@ const FloorPlans = () => {
    const plans = [
       {
          type: '1BHK',
-         area: '100 SQM.',
+         area: '65-110 SQM.',
          img: '/assets/floor plan.jpg',
          desc: 'A meticulously crafted 1BHK sanctuary designed for efficient luxury and fluid spatial harmony.'
       },
       {
          type: '2BHK',
-         area: '150 SQM.',
+         area: '100-140 SQM.',
          img: '/assets/floor plan penthouse.jpg',
          desc: 'Spacious 2BHK layout with curated living zones and a dedicated focus on technical precision.'
       },
       {
          type: '2BHK Penthouse',
-         area: '250 SQM.',
+         area: '180 SQM.',
          img: '/assets/floor plan attic.jpg',
          desc: 'The pinnacle of La Arena — a 2BHK Penthouse featuring an expansive private rooftop garden.'
       },
