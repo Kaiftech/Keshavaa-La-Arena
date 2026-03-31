@@ -23,9 +23,9 @@ const Hero = () => {
 
       <div className="container hero-container">
         <div className="hero-content" style={{ marginTop: '60px' }}>
-          <span className="hero-eyebrow">LA ARENA</span>
+          <span className="hero-eyebrow">PRIVATE ESCAPISM</span>
           <h1 className="hero-headline">
-             Private <br/><span>Escapism.</span>
+             LA <span>ARENA.</span>
           </h1>
 
           <div className="hero-actions">

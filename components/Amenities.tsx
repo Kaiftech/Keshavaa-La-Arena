@@ -4,26 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 
 const Amenities = () => {
-  const items = [
-    { 
-      title: 'Turquoise <span>Infinity</span>', 
-      subtitle: 'ROOFTOP POOL', 
-      img: '/assets/amenity-pool.png',
-      desc: 'Flowing uninterrupted sunsets over the coastline.'
-    },
-    { 
-      title: 'River <span>Sanctuary</span>', 
-      subtitle: 'PRIVATE DOCK', 
-      img: '/assets/amenity-river.png',
-      desc: 'Exclusive access to the serene riverfront.'
-    },
-    { 
-      title: 'Wellness <span>Spa</span>', 
-      subtitle: 'JACUZZI', 
-      img: '/assets/amenity-gym.png',
-      desc: 'Sanctuary designed for rejuvenation.'
-    },
-  ];
+
 
   return (
     <section id="amenities" className="amenities-section">
@@ -31,41 +12,51 @@ const Amenities = () => {
       <div className="side-line right" />
 
       <div className="container">
-        <div className="amenities-header">
-           <div className="title-area">
-             <span className="eyebrow">SIGNATURE LIFESTYLE</span>
-             <h2 className="title">
-                Curated <span>Living.</span>
-             </h2>
-           </div>
-           <div className="header-detail">
-             <span className="num">003</span>
-             <p className="desc-text">Refined details honoring the Keshavaa legacy.</p>
-           </div>
+
+        <div className="curated-features">
+          <h3 className="features-title">Curated Features</h3>
+          <ul className="features-list">
+            <li><span className="bullet"></span>River facing Rooftop Infinity Pool</li>
+            <li><span className="bullet"></span>Fully Equipped Fitness Centre</li>
+            <li><span className="bullet"></span>Exclusive Kids’ Play Lounge</li>
+            <li><span className="bullet"></span>Jacuzzi</li>
+            <li><span className="bullet"></span>Dedicated parking</li>
+            <li><span className="bullet"></span>24/7 security</li>
+          </ul>
         </div>
 
-        <div className="amenities-grid">
-          {items.map((item, i) => (
-            <div key={i} className="amenity-card">
-              <div className="img-wrap">
-                <Image src={item.img} alt={item.subtitle} fill style={{ objectFit: 'cover' }} className="amenity-img" />
-                <div className="img-overlay" />
-                <span className="card-num">{i + 1}</span>
+        <div className="location-map">
+           <div className="map-text-header">
+              <span className="eyebrow">LOCATION</span>
+              <h2 className="title">Discover <span>Nerul.</span></h2>
+           </div>
+           <a href="#enquire" className="map-wrapper">
+              <iframe 
+                 src="https://maps.google.com/maps?q=Nerul,+Goa&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                 width="100%" 
+                 height="100%" 
+                 style={{ border: 0, pointerEvents: 'none' }} 
+                 allowFullScreen 
+                 loading="lazy" 
+                 referrerPolicy="no-referrer-when-downgrade" 
+                 className="map-iframe"
+              ></iframe>
+              <div className="map-overlay">
+                 <div className="pin-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--accent-primary)" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                 </div>
+                 <p className="map-text">Nerul, Goa<br/><span>Click to Enquire</span></p>
               </div>
-              <div className="content">
-                <span className="subtitle">{item.subtitle}</span>
-                <h3 className="card-title" dangerouslySetInnerHTML={{ __html: item.title }}></h3>
-                <p className="card-desc">{item.desc}</p>
-              </div>
-            </div>
-          ))}
+           </a>
         </div>
       </div>
 
       <style jsx>{`
         .amenities-section {
            background: var(--bg-creme);
-           padding: 100px 0;
+           padding: 40px 0;
            position: relative;
            border-bottom: 1px solid var(--border-subtle);
         }
@@ -76,66 +67,79 @@ const Amenities = () => {
         .left { left: 5%; }
         .right { right: 5%; }
 
-        .amenities-header {
-           display: flex; justify-content: space-between; align-items: flex-end;
-           margin-bottom: 60px;
+
+        .curated-features {
+           margin-top: 0px;
+        }
+        .features-title {
+           font-family: var(--font-playfair); font-size: 32px; font-style: italic; color: var(--accent-primary);
+           margin-bottom: 40px; text-align: center;
+        }
+        .features-list {
+           display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+           list-style: none; padding: 0; max-width: 800px; margin: 0 auto;
+        }
+        .features-list li {
+           font-family: var(--font-inter); font-size: 16px; color: var(--text-primary);
+           display: flex; align-items: center; gap: 15px; font-weight: 500;
+        }
+        .bullet {
+           width: 6px; height: 6px; background: var(--accent-primary); border-radius: 50%;
+           display: inline-block;
         }
 
-        .eyebrow {
-           display: block; font-family: var(--font-inter); font-size: 11px;
-           font-weight: 800; letter-spacing: 0.8em; color: var(--accent-primary);
-           margin-bottom: 20px;
+        .location-map {
+           margin-top: 100px;
         }
-
-        .title {
-           font-family: var(--font-inter); font-size: 58px; font-weight: 300;
-           line-height: 1.1; color: var(--text-primary); letter-spacing: -3px;
+        .map-text-header {
+           text-align: center; margin-bottom: 40px;
         }
-        .title span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
-
-        .header-detail { display: flex; align-items: flex-start; gap: 20px; text-align: right; }
-        .num { font-size: 12px; font-weight: 800; color: var(--accent-primary); opacity: 0.3; font-family: var(--font-inter); }
-        .desc-text { font-family: var(--font-inter); font-size: 15px; color: var(--text-secondary); max-width: 250px; }
-
-        .amenities-grid {
-           display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
-        }
-
-        .img-wrap {
-           position: relative; width: 100%; height: 320px;
-           overflow: hidden; border-radius: 4px; margin-bottom: 30px;
+        .map-wrapper {
+           display: block; width: 100%; height: 400px;
+           background: #e6e3df;
+           position: relative; overflow: hidden;
+           text-decoration: none; border-radius: 8px; cursor: pointer;
            border: 1px solid var(--border-subtle);
+           transition: border-color 0.4s ease;
         }
-        .img-overlay { position: absolute; inset: 0; background: rgba(8, 22, 23, 0.05); z-index: 10; transition: background 0.4s; }
-        .amenity-card:hover .img-overlay { background: rgba(8, 22, 23, 0); }
-
-        .card-num {
-           position: absolute; top: 20px; right: 20px; z-index: 20;
-           font-family: var(--font-playfair); font-size: 20px; font-style: italic; color: #fff;
-           opacity: 0.5;
+        .map-iframe {
+           display: block; width: 100%; height: 100%;
         }
-
-        .amenity-img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-        .amenity-card:hover .amenity-img { transform: scale(1.08); }
-
-        .subtitle {
-           display: block; font-family: var(--font-inter); font-size: 10px;
-           font-weight: 800; letter-spacing: 0.4em; color: var(--accent-primary);
-           margin-bottom: 12px; text-transform: uppercase;
+        .map-wrapper:hover {
+           border-color: var(--accent-primary);
         }
-        .card-title {
-           font-family: var(--font-playfair); font-size: 26px; color: var(--text-primary);
-           margin-bottom: 15px; line-height: 1.2;
+        .map-overlay {
+           position: absolute; inset: 0; display: flex; flex-direction: column;
+           align-items: center; justify-content: center;
+           background: rgba(8, 22, 23, 0.04); transition: background 0.3s ease;
         }
-        .card-title :global(span) { font-style: italic; color: var(--accent-primary); }
-        .card-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; opacity: 0.7; }
+        .map-wrapper:hover .map-overlay { background: rgba(8, 22, 23, 0.08); }
+        .pin-icon {
+           animation: float 3s ease-in-out infinite; margin-bottom: 10px;
+        }
+        .map-text {
+           font-family: var(--font-inter); font-size: 20px; font-weight: 800;
+           color: var(--bg-deep); text-align: center; line-height: 1.5;
+        }
+        .map-text span {
+           display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: 2px;
+           text-transform: uppercase; color: #ffffff; background: var(--accent-primary);
+           padding: 12px 24px; border-radius: 4px; margin-top: 15px;
+           transition: all 0.3s ease;
+        }
+        .map-wrapper:hover .map-text span {
+           background: #ffffff; color: #000000; transform: translateY(-3px);
+           box-shadow: 0 10px 25px rgba(32, 178, 170, 0.3);
+        }
+        @keyframes float {
+           0% { transform: translateY(0); }
+           50% { transform: translateY(-8px); }
+           100% { transform: translateY(0); }
+        }
 
         @media (max-width: 1024px) {
            .title { font-size: 45px; }
-           .amenities-grid { grid-template-columns: 1fr; gap: 60px; }
-           .amenities-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-           .header-detail { text-align: left; }
-           .side-line { display: none; }
+           .features-list { grid-template-columns: 1fr; gap: 15px; }
         }
       `}</style>
     </section>

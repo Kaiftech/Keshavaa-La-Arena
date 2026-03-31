@@ -34,12 +34,12 @@ const Footer = () => {
           <div className="footer-legal reveal" style={{ animationDelay: '0.2s' }}>
             <span className="label">CONTACT</span>
             <div className="legal-data">
-              <p>Nerul Riviera, Goa</p>
+              <p>Nerul , Goa</p>
               <p>
-                 <a href="tel:+916262962621" className="contact-link">+91 62629 62621</a>
+                 <a href="tel:+916262962621" className="contact-link">+91 6262 9 6262 1</a>
               </p>
               <p>
-                 <a href="https://wa.me/916262962621" target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp: +91 62629 62621</a>
+                 <a href="https://wa.me/916262962621" target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp: +91 6262 9 6262 1</a>
               </p>
               <div className="cta-area">
                  <a href="#enquire" className="footer-btn">Get In Touch</a>
@@ -50,6 +50,7 @@ const Footer = () => {
 
         <div className="copyright reveal" style={{ animationDelay: '0.3s' }}>
           <span>© {new Date().getFullYear()} Keshavaa Developers.</span>
+          <span>A KESHAVAA SIGNATURE</span>
           <span>MAHARERA: PXXXXXXXX</span>
         </div>
       </div>

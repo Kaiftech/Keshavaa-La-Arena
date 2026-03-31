@@ -47,7 +47,7 @@ const Header = () => {
       <style jsx>{`
         .modern-header {
            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-           padding: 40px 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+           padding: 20px 0; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .modern-header.scrolled {
            padding: 15px 0; background: rgba(255, 255, 255, 0.9);

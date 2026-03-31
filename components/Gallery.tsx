@@ -4,18 +4,12 @@ import React from 'react';
 import { ImageAutoSlider } from "./ui/image-auto-slider";
 
 const Gallery = () => {
-   // Balanced project narrative across all assets
    const allImages = [
       "/assets/bulding1.png",
       "/assets/bulding2.png",
       "/assets/bulding3.png",
       "/assets/bulding4.png",
-      "/assets/bulding5.png",
-      '/assets/amenity-pool.png',
-      '/assets/amenity-river.png',
-      '/assets/amenity-gym.png',
-      '/assets/amenity-kids.png',
-      '/assets/amenity-parking.png'
+      "/assets/bulding5.png"
    ];
 
    return (
@@ -39,7 +33,7 @@ const Gallery = () => {
          <style jsx>{`
         .gallery-section {
            background: #ffffff;
-           padding: 120px 0;
+           padding: 60px 0;
            border-top: 1px solid var(--border-subtle);
            position: relative;
         }
@@ -61,13 +55,13 @@ const Gallery = () => {
            font-family: var(--font-inter); font-size: 10px; font-weight: 900;
            letter-spacing: 0.3em; color: var(--text-primary); opacity: 0.3;
         }
-        .gallery-slider-wrap { margin-bottom: 40px; }
+        .gallery-slider-wrap { margin-bottom: 0; }
         @media (max-width: 1024px) {
            .title { font-size: 45px; }
         }
         @media (max-width: 768px) {
            .gallery-header { flex-direction: column; align-items: flex-start; gap: 30px; }
-           .gallery-section { padding: 80px 0; }
+           .gallery-section { padding: 40px 0; }
         }
       `}</style>
       </section>

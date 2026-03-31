@@ -32,7 +32,7 @@ const ProjectMetrics = () => {
       <style jsx>{`
         .metrics-belt {
           background: #ffffff;
-          padding: 30px 0;
+          padding: 15px 0;
           border-bottom: 1px solid var(--border-subtle);
           position: relative;
           z-index: 50;
@@ -41,12 +41,12 @@ const ProjectMetrics = () => {
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 60px;
+          gap: 35px;
         }
         .metric-item {
           display: flex;
           align-items: baseline;
-          gap: 15px;
+          gap: 12px;
         }
         .label {
           font-family: var(--font-inter);

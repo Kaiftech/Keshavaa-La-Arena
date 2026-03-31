@@ -6,22 +6,22 @@ import Image from 'next/image';
 const FloorPlans = () => {
    const plans = [
       {
-         type: '1BHK',
-         area: '65-110 SQM.',
+         type: '1 BHK',
+         area: '65 – 110 SQ.M.',
          img: '/assets/floor plan.jpg',
-         desc: 'A meticulously crafted 1BHK sanctuary designed for efficient luxury and fluid spatial harmony.'
+         desc: 'Smartly designed for effortless living, perfect as a holiday home or a high-yield investment in Goa.'
       },
       {
-         type: '2BHK',
-         area: '100-140 SQM.',
+         type: '2 BHK',
+         area: '100 – 140 SQ.M.',
          img: '/assets/floor plan penthouse.jpg',
-         desc: 'Spacious 2BHK layout with curated living zones and a dedicated focus on technical precision.'
+         desc: 'Spacious layouts with thoughtfully defined living zones—ideal for families, longer stays, and elevated comfort.'
       },
       {
-         type: '2BHK Penthouse',
-         area: '180 SQM.',
+         type: '2 BHK Penthouse',
+         area: '180 SQ.M.',
          img: '/assets/floor plan attic.jpg',
-         desc: 'The pinnacle of La Arena — a 2BHK Penthouse featuring an expansive private rooftop garden.'
+         desc: 'An elevated living experience with your own private rooftop—crafted for those who want space, privacy, and a statement lifestyle.'
       },
    ];
 
@@ -64,7 +64,7 @@ const FloorPlans = () => {
                         <h3 className="type">{plan.type}</h3>
                         <p className="summary">{plan.desc}</p>
                         <div className="action">
-                           <a href="#enquire" className="unlock-btn">Enquire for Blueprint</a>
+                           <a href="#enquire" className="unlock-btn">ENQUIRE FOR FLOOR PLAN</a>
                         </div>
                      </div>
                   </div>
@@ -75,7 +75,7 @@ const FloorPlans = () => {
          <style jsx>{`
         .floorplans-section {
            background: #ffffff;
-           padding: 60px 0;
+           padding: 30px 0;
            border-top: 1px solid var(--border-subtle);
         }
         .floorplans-header {

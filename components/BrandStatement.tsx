@@ -22,7 +22,7 @@ const BrandStatement = () => {
       <style jsx>{`
         .brand-section {
            background: var(--bg-creme);
-           padding: 120px 0;
+           padding: 40px 0;
            position: relative;
            overflow: hidden;
            border-bottom: 1px solid var(--border-subtle);
@@ -67,9 +67,10 @@ const BrandStatement = () => {
         }
 
         @media (max-width: 768px) {
+           .brand-section { padding: 30px 0; }
            .brand-title { font-size: 44px; letter-spacing: -2px; }
            .brand-manifesto { font-size: 15px; padding: 0 20px; }
-           .eyebrow-badge { font-size: 9px; letter-spacing: 0.2em; }
+           .eyebrow-badge { font-size: 9px; letter-spacing: 0.2em; margin-bottom: 0; }
         }
       `}</style>
     </section>

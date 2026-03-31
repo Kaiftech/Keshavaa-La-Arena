@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ProjectMetrics from "@/components/ProjectMetrics";
 import BrandStatement from "@/components/BrandStatement";
 import Gallery from "@/components/Gallery";
+import Amenities from "@/components/Amenities";
 import FloorPlans from "@/components/FloorPlans";
 import Footer from "@/components/Footer";
 import Popup from "@/components/Popup";
@@ -27,9 +28,11 @@ export default function Home() {
       {/* Technical Layouts - Moved Up */}
       <FloorPlans />
       
-      {/* Unified Lifestyle & Visual Archive (Amenities + Gallery) */}
+      {/* Visual Archive (Gallery) */}
       <Gallery />
       
+      {/* Curated Features & Location Map */}
+      <Amenities />
 
       <Footer />
     </main>

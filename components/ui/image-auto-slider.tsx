@@ -12,12 +12,7 @@ export const ImageAutoSlider = ({
     "/assets/bulding2.png",
     "/assets/bulding3.png",
     "/assets/bulding4.png",
-    "/assets/bulding5.png",
-    "/assets/amenity-pool.png",
-    "/assets/amenity-river.png",
-    "/assets/amenity-gym.png",
-    "/assets/amenity-kids.png",
-    "/assets/amenity-parking.png"
+    "/assets/bulding5.png"
   ]
 }: ImageAutoSliderProps) => {
   // Duplicate images for seamless loop
