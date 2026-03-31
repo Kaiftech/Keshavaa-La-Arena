@@ -145,7 +145,7 @@ const FloorPlans = () => {
            color: var(--accent-primary); margin-bottom: 10px; line-height: 1.6;
         }
         .type {
-           font-family: var(--font-inter); font-size: 32px; font-weight: bold; line-height: 1.2;
+           font-family: var(--font-inter); font-size: 27px; font-weight: bold; line-height: 1.2;
            color: var(--text-primary); margin-bottom: 10px; letter-spacing: -1px;
         }
         .summary { font-family: var(--font-inter); font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 0 10px; }

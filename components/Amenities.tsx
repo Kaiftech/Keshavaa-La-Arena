@@ -14,7 +14,10 @@ const Amenities = () => {
       <div className="container">
 
         <div className="curated-features">
-          <h3 className="features-title">Curated Features</h3>
+          <div className="map-text-header">
+             <span className="eyebrow">SIGNATURE LIFESTYLE</span>
+             <h2 className="title">Curated <span>Features.</span></h2>
+          </div>
           <ul className="features-list">
             <li><span className="bullet"></span>River facing Rooftop Infinity Pool</li>
             <li><span className="bullet"></span>Fully Equipped Fitness Centre</li>
@@ -71,10 +74,16 @@ const Amenities = () => {
         .curated-features {
            margin-top: 0px;
         }
-        .features-title {
-           font-family: var(--font-playfair); font-size: 32px; font-style: italic; color: var(--accent-primary);
-           margin-bottom: 40px; text-align: center;
+        .eyebrow {
+           display: block; font-family: var(--font-inter); font-size: 11px;
+           font-weight: 800; letter-spacing: 0.8em; color: var(--accent-primary);
+           margin-bottom: 20px; text-transform: uppercase;
         }
+        .title {
+           font-family: var(--font-inter); font-size: 58px; font-weight: 300;
+           line-height: 1.1; color: var(--text-primary); letter-spacing: -3px;
+        }
+        .title span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
         .features-list {
            display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
            list-style: none; padding: 0; max-width: 800px; margin: 0 auto;
