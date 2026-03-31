@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import ProjectMetrics from "@/components/ProjectMetrics";
 import BrandStatement from "@/components/BrandStatement";
-import Specs from "@/components/Specs";
-import Amenities from "@/components/Amenities";
 import Gallery from "@/components/Gallery";
 import FloorPlans from "@/components/FloorPlans";
 import Footer from "@/components/Footer";
@@ -18,21 +17,19 @@ export default function Home() {
       
       {/* High-Impact Turquoise-Noir Hero */}
       <Hero />
+
+      {/* Standalone Project Stats belt - Positioned 'under' the banner */}
+      <ProjectMetrics />
       
-      {/* Heritage & Brand Highlights */}
+      {/* Heritage & Brand Highlights - Short & Sweet Luxury Intro */}
       <BrandStatement />
       
-      {/* Lifestyle & Architecture Narrative */}
-      <Amenities />
-      
-      {/* Visual Archive */}
-      <Gallery />
-      
-      {/* Technical Layouts - Gated High-Res Unlock */}
+      {/* Technical Layouts - Moved Up */}
       <FloorPlans />
       
-      {/* Refined Technical Finishes */}
-      <Specs />
+      {/* Unified Lifestyle & Visual Archive (Amenities + Gallery) */}
+      <Gallery />
+      
 
       <Footer />
     </main>

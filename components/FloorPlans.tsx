@@ -48,7 +48,15 @@ const FloorPlans = () => {
                   fill
                   style={{ objectFit: 'contain' }}
                   className="floor-img"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                 />
+                <div className="enquiry-overlay">
+                   <div className="enquiry-badge">
+                      <span className="lock-icon">🔒</span>
+                      ENQUIRE NOW
+                   </div>
+                   <p>Request Technical Blueprint</p>
+                </div>
               </a>
 
               <div className="floorplan-info">
@@ -94,15 +102,44 @@ const FloorPlans = () => {
            background: #ffffff; border-radius: 8px; margin-bottom: 25px;
            border: 1px solid #f2f2f2; display: block; overflow: hidden;
            cursor: pointer; text-decoration: none;
+           /* Hatched Pattern Over the image */
+           background-image: repeating-linear-gradient(
+             45deg,
+             rgba(0, 0, 0, 0.01) 0px,
+             rgba(0, 0, 0, 0.01) 1px,
+             transparent 1px,
+             transparent 3px
+           );
         }
         .plan-visual :global(.floor-img) {
-           filter: blur(1.5px) contrast(1.05) opacity(0.85);
-           transition: all 0.5s ease;
+           filter: blur(8px) contrast(1.05) opacity(0.85);
+           transition: all 0.6s ease;
            transform: scale(0.98);
         }
         .plan-visual:hover :global(.floor-img) {
-           filter: blur(0px) contrast(1.1) opacity(1); transform: scale(1.02);
+           filter: blur(8px) contrast(1.1) opacity(0.95);
+           transform: scale(1.02);
         }
+
+        .enquiry-overlay {
+           position: absolute; inset: 0;
+           display: flex; flex-direction: column; align-items: center; justify-content: center;
+           z-index: 20; color: #fff;
+           background: rgba(8, 22, 23, 0.5);
+           backdrop-filter: blur(4px);
+           opacity: 0; transition: opacity 0.4s ease;
+        }
+        .plan-visual:hover .enquiry-overlay { opacity: 1; }
+
+        .enquiry-badge {
+           display: flex; flex-direction: column; align-items: center; gap: 10px;
+           font-family: var(--font-inter); font-size: 11px; font-weight: 800;
+           letter-spacing: 0.5em; border: 1px solid var(--accent-primary);
+           padding: 15px 35px; border-radius: 4px; background: var(--accent-primary);
+           color: #000; margin-bottom: 10px;
+        }
+        .lock-icon { font-size: 18px; margin-bottom: 5px; opacity: 0.8; }
+        .enquiry-overlay p { font-family: var(--font-inter); font-size: 9px; font-weight: 800; letter-spacing: 2px; opacity: 0.8; text-transform: uppercase; }
 
         .floorplan-info { text-align: center; }
         .area {

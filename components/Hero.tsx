@@ -14,38 +14,21 @@ const Hero = () => {
           fill 
           priority
           className="hero-img"
+          sizes="100vw"
         />
         {/* Cinematic Noir Depth */}
         <div className="hero-overlay" />
       </div>
 
-      {/* Architectural Fine-Line Details */}
-      <div className="corner-frame top-left" />
-      <div className="corner-frame top-right" />
-      <div className="corner-frame bottom-left" />
-      <div className="corner-frame bottom-right" />
-
       <div className="container hero-container">
         <div className="hero-content">
-          <div className="hero-arch-ledger">
-             <span>ARCHIVE-032</span>
-             <div className="dot-line" />
-             <span>GOA PROJECT</span>
-          </div>
-
+          <span className="hero-eyebrow">LA ARENA</span>
           <h1 className="hero-headline">
              Private <br/><span>Escapism.</span>
           </h1>
-          
-          <p className="hero-desc">
-             Bespoke riverfront residences reflecting the serene turquoise soul of Goa. 
-             A Keshavaa Signature Estate.
-          </p>
 
           <div className="hero-actions">
              <a href="#enquire" className="btn-modern">ENQUIRE NOW</a>
-             <div className="separator" />
-             <a href="#gallery" className="btn-ghost">VIEW GALLERY</a>
           </div>
         </div>
       </div>
@@ -101,6 +84,12 @@ const Hero = () => {
         }
         .dot-line { height: 1px; flex: 0 0 40px; background: var(--accent-primary); }
 
+        .hero-eyebrow {
+           display: block; font-family: var(--font-inter); font-size: 11px; font-weight: 800;
+           letter-spacing: 0.8em; color: var(--accent-primary); margin-bottom: 25px;
+           opacity: 0.8;
+        }
+
         .hero-headline {
            font-family: var(--font-inter); font-size: 92px; font-weight: 300;
            line-height: 0.95; color: #fff; letter-spacing: -4px;
@@ -111,16 +100,11 @@ const Hero = () => {
            color: var(--accent-glow);
         }
         
-        .hero-desc {
-           font-family: var(--font-inter); font-size: 17px; line-height: 1.7;
-           color: rgba(255,255,255,0.7); max-width: 650px; margin: 0 auto 50px;
-           letter-spacing: 0.01em; opacity: 0; animation: revealIn 1s 0.8s forwards;
-        }
-
         .hero-actions { 
            display: flex; gap: 30px; justify-content: center; align-items: center;
            opacity: 0; animation: revealIn 1s 1s forwards;
         }
+
         .btn-modern {
            background: var(--accent-primary); color: #000;
            padding: 20px 50px; font-family: var(--font-inter); font-weight: 900;

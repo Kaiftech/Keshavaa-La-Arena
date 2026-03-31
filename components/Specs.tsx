@@ -68,36 +68,40 @@ const Specs = () => {
         .header-badge span { font-weight: 500; font-size: 8px; }
 
         .specs-grid {
-           display: grid; grid-template-columns: 1fr 1fr;
-           column-gap: 80px; row-gap: 40px;
+           display: grid; grid-template-columns: repeat(3, 1fr);
+           gap: 60px;
         }
 
         .spec-item {
-           display: flex; justify-content: space-between; align-items: center;
-           border-bottom: 1px solid #f8f8f8; padding-bottom: 15px;
-           transition: border-color 0.4s ease;
+           display: flex; flex-direction: column; gap: 15px;
+           padding: 25px 0; border-top: 1px solid var(--border-subtle);
+           transition: background 0.3s ease;
         }
-        .spec-item:hover { border-color: var(--accent-primary); }
+        .spec-item:hover { background: rgba(32,178,170,0.02); }
 
-        .spec-label-wrap { display: flex; align-items: center; gap: 15px; }
+        .spec-label-wrap { display: flex; align-items: center; gap: 8px; }
         .label {
-           font-family: var(--font-inter); font-size: 9px; font-weight: 900;
-           letter-spacing: 0.25em; color: var(--accent-primary); opacity: 0.5;
+           font-family: var(--font-inter); font-size: 8px; font-weight: 900;
+           letter-spacing: 0.25em; color: var(--accent-primary);
            text-transform: uppercase;
         }
-        .label-dot { width: 3px; height: 3px; border-radius: 50%; border: 1px solid var(--accent-primary); }
+        .label-dot { width: 15px; height: 1px; background: var(--accent-primary); opacity: 0.3; }
 
         .val {
-           font-family: var(--font-inter); font-size: 17px; font-weight: 700;
-           color: var(--text-primary); opacity: 0.9; text-transform: none;
-           letter-spacing: -0.5px;
+           font-family: var(--font-inter); font-size: 15px; font-weight: 600;
+           color: var(--text-primary); text-transform: uppercase;
+           letter-spacing: 0.5px; line-height: 1.4;
         }
 
         @media (max-width: 1024px) {
            .title { font-size: 45px; }
-           .specs-grid { grid-template-columns: 1fr; gap: 40px; }
+           .specs-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
            .specs-header { flex-direction: column; align-items: flex-start; gap: 30px; }
            .header-badge { text-align: left; }
+        }
+        @media (max-width: 768px) {
+           .specs-grid { grid-template-columns: 1fr; gap: 20px; }
+           .spec-item { padding: 15px 0; }
         }
       `}</style>
     </section>
