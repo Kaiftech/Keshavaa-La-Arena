@@ -19,11 +19,11 @@ const ProjectMetrics = () => {
           <div className="v-divider" />
           <div className="metric-item">
             <span className="label">TYPE</span>
-            <span className="value">1BHK, 2BHK, 2BHK PENTHOUSE</span>
+            <span className="value">1BHK, 2BHK & 2BHK PENTHOUSE</span>
           </div>
           <div className="v-divider" />
           <div className="metric-item">
-            <span className="label">STATUS</span>
+            <span className="label">Features</span>
             <span className="value">PRIVATE JACUZZI</span>
           </div>
         </div>
