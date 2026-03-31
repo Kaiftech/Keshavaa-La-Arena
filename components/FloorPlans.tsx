@@ -4,75 +4,75 @@ import React from 'react';
 import Image from 'next/image';
 
 const FloorPlans = () => {
-  const plans = [
-    { 
-      type: '1BHK Residence', 
-      area: '100 SQM.', 
-      img: '/assets/floor plan.jpg',
-      desc: 'A meticulously crafted 1BHK sanctuary designed for efficient luxury and fluid spatial harmony.'
-    },
-    { 
-      type: '2BHK Residence', 
-      area: '150 SQM.', 
-      img: '/assets/floor plan penthouse.jpg',
-      desc: 'Spacious 2BHK layout with curated living zones and a dedicated focus on technical precision.'
-    },
-    { 
-      type: '2BHK Penthouse', 
-      area: '250 SQM.', 
-      img: '/assets/floor plan attic.jpg',
-      desc: 'The pinnacle of La Arena — a 2BHK Penthouse featuring an expansive private rooftop garden.'
-    },
-  ];
+   const plans = [
+      {
+         type: '1BHK',
+         area: '100 SQM.',
+         img: '/assets/floor plan.jpg',
+         desc: 'A meticulously crafted 1BHK sanctuary designed for efficient luxury and fluid spatial harmony.'
+      },
+      {
+         type: '2BHK',
+         area: '150 SQM.',
+         img: '/assets/floor plan penthouse.jpg',
+         desc: 'Spacious 2BHK layout with curated living zones and a dedicated focus on technical precision.'
+      },
+      {
+         type: '2BHK Penthouse',
+         area: '250 SQM.',
+         img: '/assets/floor plan attic.jpg',
+         desc: 'The pinnacle of La Arena — a 2BHK Penthouse featuring an expansive private rooftop garden.'
+      },
+   ];
 
-  return (
-    <section id="floorplans" className="floorplans-section">
-      <div className="container floorplans-container">
-        <div className="floorplans-header">
-           <div className="title-area">
-             <span className="eyebrow">TECHNICAL PRECISION</span>
-             <h2 className="title">
-                Architectural <span>Layouts.</span>
-             </h2>
-           </div>
-           <p className="desc">Bespoke spatial design optimized for the Nerul riverfront.</p>
-        </div>
-
-        <div className="floorplans-grid">
-          {plans.map((plan, i) => (
-            <div key={i} className="floorplan-card">
-              <a href="#enquire" className="plan-visual">
-                <Image 
-                  src={plan.img} 
-                  alt={plan.type} 
-                  fill
-                  style={{ objectFit: 'contain' }}
-                  className="floor-img"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-                <div className="enquiry-overlay">
-                   <div className="enquiry-badge">
-                      <span className="lock-icon">🔒</span>
-                      ENQUIRE NOW
-                   </div>
-                   <p>Request Technical Blueprint</p>
-                </div>
-              </a>
-
-              <div className="floorplan-info">
-                <span className="area">{plan.area}</span>
-                <h3 className="type">{plan.type}</h3>
-                <p className="summary">{plan.desc}</p>
-                <div className="action">
-                   <a href="#enquire" className="unlock-btn">Enquire for Blueprint</a>
-                </div>
-              </div>
+   return (
+      <section id="floorplans" className="floorplans-section">
+         <div className="container floorplans-container">
+            <div className="floorplans-header">
+               <div className="title-area">
+                  <span className="eyebrow">TECHNICAL PRECISION</span>
+                  <h2 className="title">
+                     Architectural <span>Layouts.</span>
+                  </h2>
+               </div>
+               <p className="desc">Bespoke spatial design optimized for the Nerul riverfront.</p>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <style jsx>{`
+            <div className="floorplans-grid">
+               {plans.map((plan, i) => (
+                  <div key={i} className="floorplan-card">
+                     <a href="#enquire" className="plan-visual">
+                        <Image
+                           src={plan.img}
+                           alt={plan.type}
+                           fill
+                           style={{ objectFit: 'contain' }}
+                           className="floor-img"
+                           sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                        <div className="enquiry-overlay">
+                           <div className="enquiry-badge">
+                              <span className="lock-icon">🔒</span>
+                              ENQUIRE NOW
+                           </div>
+                           <p>Request Technical Blueprint</p>
+                        </div>
+                     </a>
+
+                     <div className="floorplan-info">
+                        <span className="area">{plan.area}</span>
+                        <h3 className="type">{plan.type}</h3>
+                        <p className="summary">{plan.desc}</p>
+                        <div className="action">
+                           <a href="#enquire" className="unlock-btn">Enquire for Blueprint</a>
+                        </div>
+                     </div>
+                  </div>
+               ))}
+            </div>
+         </div>
+
+         <style jsx>{`
         .floorplans-section {
            background: #ffffff;
            padding: 60px 0;
@@ -168,8 +168,8 @@ const FloorPlans = () => {
            .desc { text-align: left; }
         }
       `}</style>
-    </section>
-  );
+      </section>
+   );
 };
 
 export default FloorPlans;
