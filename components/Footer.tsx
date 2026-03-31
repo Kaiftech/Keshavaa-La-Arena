@@ -35,7 +35,6 @@ const Footer = () => {
             <span className="label">CONTACT</span>
             <div className="legal-data">
               <p>Nerul Riviera, Goa</p>
-              <p>sales@keshavaa-properties.site</p>
               <div className="cta-area">
                  <a href="#enquire" className="footer-btn">Get In Touch</a>
               </div>
@@ -104,9 +103,11 @@ const Footer = () => {
         }
 
         @media (max-width: 768px) {
-           .footer-grid { grid-template-columns: 1fr; gap: 50px; }
-           .copyright { flex-direction: column; gap: 15px; text-align: center; }
-           .brand-statement { font-size: 26px; }
+           .footer-section { padding: 60px 0 30px; }
+           .footer-grid { grid-template-columns: 1fr; gap: 40px; margin-bottom: 40px; }
+           .copyright { flex-direction: column; gap: 10px; text-align: center; padding-top: 20px; }
+           .brand-statement { font-size: 26px; margin-top: 15px; }
+           .label { margin-bottom: 15px; }
         }
       `}</style>
     </footer>

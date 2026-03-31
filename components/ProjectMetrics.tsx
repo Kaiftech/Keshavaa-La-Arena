@@ -73,18 +73,25 @@ const ProjectMetrics = () => {
           .metrics-grid { gap: 30px; }
         }
         @media (max-width: 768px) {
-          .metrics-belt { padding: 40px 0; }
+          .metrics-belt { padding: 30px 20px; }
           .metrics-grid {
-            flex-direction: column;
-            gap: 25px;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
           }
           .v-divider { display: none; }
           .metric-item {
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             gap: 5px;
-            text-align: center;
+            text-align: left;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-subtle);
+          }
+          .metric-item:nth-last-child(-n+2) {
+             border-bottom: none;
+             padding-bottom: 0;
           }
           .value { font-size: 14px; }
         }

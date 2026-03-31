@@ -62,7 +62,7 @@ const BrandStatement = () => {
         
         .seal-circle {
            width: 50px; height: 50px; border: 1px solid var(--accent-primary); border-radius: 50%;
-           display: flex; align-items: center; justify-content: center; font-size: 10px;
+           display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0;
         }
 
         @media (max-width: 1024px) {
