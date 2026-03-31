@@ -7,15 +7,15 @@ const Popup = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    city: '',
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // TRIGGER ON OPEN: Open the popup immediately when the website loads
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 1200); // 1.2s delay for a smoother entry after initial hero load
+    }, 1200);
 
-    // Listen for manual triggers (e.g. #enquire clicks)
     const handleHashChange = () => {
       if (window.location.hash === '#enquire') {
         setIsVisible(true);
@@ -29,9 +29,17 @@ const Popup = () => {
     };
   }, []);
 
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name) newErrors.name = 'NAME IS REQUIRED';
+    if (!formData.phone || formData.phone.length < 10) newErrors.phone = 'INVALID PHONE';
+    if (!formData.city) newErrors.city = 'CITY IS REQUIRED';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const closePopup = () => {
     setIsVisible(false);
-    // Remove the hash from URL if present
     if (window.location.hash === '#enquire') {
       window.history.replaceState(null, '', ' ');
     }
@@ -40,13 +48,16 @@ const Popup = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Lead Captured:', formData);
-    alert('Thank you. A Keshavaa Specialist will contact you shortly.');
-    closePopup();
+    if (validate()) {
+      console.log('Lead Captured:', formData);
+      alert('Thank you. A Keshavaa Specialist will contact you shortly.');
+      closePopup();
+    }
   };
 
   if (!isVisible) return null;
@@ -65,25 +76,26 @@ const Popup = () => {
         <form onSubmit={handleSubmit} className="popup-form">
           <div className="input-group">
             <input 
-              type="text" 
-              name="name" 
-              placeholder="YOUR NAME" 
-              required 
-              value={formData.name}
-              onChange={handleInputChange}
+              type="text" name="name" placeholder="YOUR NAME" 
+              required value={formData.name} onChange={handleInputChange}
             />
+            {errors.name && <span className="error">{errors.name}</span>}
           </div>
           <div className="input-group">
             <input 
-              type="tel" 
-              name="phone" 
-              placeholder="PHONE NUMBER" 
-              required 
-              value={formData.phone}
-              onChange={handleInputChange}
+              type="text" name="city" placeholder="YOUR CITY" 
+              required value={formData.city} onChange={handleInputChange}
             />
+            {errors.city && <span className="error">{errors.city}</span>}
           </div>
-          <button type="submit" className="submit-btn">REQUEST INVITE</button>
+          <div className="input-group">
+            <input 
+              type="tel" name="phone" placeholder="PHONE NUMBER" 
+              required value={formData.phone} onChange={handleInputChange}
+            />
+            {errors.phone && <span className="error">{errors.phone}</span>}
+          </div>
+          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city}>REQUEST INVITE</button>
         </form>
 
         <p className="footer-note">EXCLUSIVE KESHAVAA SIGNATURE ESTATE</p>
@@ -127,6 +139,13 @@ const Popup = () => {
 
         .popup-form { display: flex; flex-direction: column; gap: 20px; }
         
+        .input-group { position: relative; }
+        .error {
+           position: absolute; right: 10px; top: 18px;
+           font-family: var(--font-inter); font-size: 8px; font-weight: 900;
+           color: #ff4444; letter-spacing: 1px;
+        }
+
         input {
           width: 100%; padding: 16px; border: none; background: #f8fcfc;
           border-bottom: 2px solid #eee; font-family: var(--font-inter);

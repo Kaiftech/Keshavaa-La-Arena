@@ -10,7 +10,7 @@ const Hero = () => {
       <div className="hero-bg">
         <Image 
           src="/assets/bulding3.png" 
-          alt="Keshavaa Riviera" 
+          alt="Keshavaa La Arena" 
           fill 
           priority
           className="hero-img"
@@ -33,13 +33,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll indicator - Ultra Delicate */}
-      <div className="scroll-hint">
-        <div className="mouse">
-           <div className="wheel" />
-        </div>
-        <span>SCROLL TO DISCOVER</span>
-      </div>
 
       <style jsx>{`
         .hero-section {
@@ -85,13 +78,13 @@ const Hero = () => {
         .dot-line { height: 1px; flex: 0 0 40px; background: var(--accent-primary); }
 
         .hero-eyebrow {
-           display: block; font-family: var(--font-inter); font-size: 11px; font-weight: 800;
+           display: block; font-family: var(--font-inter); font-size: 12px; font-weight: 800;
            letter-spacing: 0.8em; color: var(--accent-primary); margin-bottom: 25px;
            opacity: 0.8;
         }
 
         .hero-headline {
-           font-family: var(--font-inter); font-size: 92px; font-weight: 300;
+           font-family: var(--font-inter); font-size: 102px; font-weight: 300;
            line-height: 0.95; color: #fff; letter-spacing: -4px;
            margin-bottom: 35px; text-transform: capitalize;
         }
@@ -122,24 +115,6 @@ const Hero = () => {
         }
         .btn-ghost:hover { opacity: 1; }
 
-        .scroll-hint {
-           position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-           display: flex; flex-direction: column; align-items: center; gap: 15px;
-           z-index: 40; opacity: 0.4;
-        }
-        .mouse {
-           width: 24px; height: 40px; border: 1px solid #fff; border-radius: 20px;
-           position: relative;
-        }
-        .wheel {
-           width: 2px; height: 8px; background: #fff; border-radius: 2px;
-           position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-           animation: mouseMove 2s infinite ease-in-out;
-        }
-        .scroll-hint span {
-           font-size: 9px; letter-spacing: 3px; color: #fff; font-weight: 800;
-        }
-
         @keyframes atmosphericZoom {
            from { transform: scale(1); }
            to { transform: scale(1.15); }
@@ -147,11 +122,6 @@ const Hero = () => {
         @keyframes revealIn {
            from { opacity: 0; transform: translateY(20px); }
            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes mouseMove {
-           0% { opacity: 0; transform: translate(-50%, 0); }
-           50% { opacity: 1; transform: translate(-50%, 10px); }
-           100% { opacity: 0; transform: translate(-50%, 20px); }
         }
 
         @media (max-width: 1024px) {

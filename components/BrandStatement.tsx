@@ -12,7 +12,7 @@ const BrandStatement = () => {
              The Soul of <br/><span>Goan Modernism.</span>
           </h2>
           <p className="brand-manifesto">
-             We built La Arena as a tribute to Goan river life. It’s a simple, honest space on the banks of Nerul—where local heritage meets modern comfort, and the design feels as steady and serene as the water it overlooks.
+             We built La Arena as a tribute to modern Goan living. It’s a simple, honest space in the heart of Nerul—where local heritage meets contemporary comfort, and the design feels as steady and serene as the heritage village it honors.
           </p>
           
           <div className="heritage-seal">

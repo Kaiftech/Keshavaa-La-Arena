@@ -9,7 +9,7 @@ const ProjectMetrics = () => {
         <div className="metrics-grid">
           <div className="metric-item">
             <span className="label">ESTATE</span>
-            <span className="value">3,200 SQ. FT.</span>
+            <span className="value">300 SQM.</span>
           </div>
           <div className="v-divider" />
           <div className="metric-item">
@@ -19,12 +19,12 @@ const ProjectMetrics = () => {
           <div className="v-divider" />
           <div className="metric-item">
             <span className="label">TYPE</span>
-            <span className="value">RIVERFRONT</span>
+            <span className="value">BOUTIQUE</span>
           </div>
           <div className="v-divider" />
           <div className="metric-item">
             <span className="label">STATUS</span>
-            <span className="value">EXCLUSIVE</span>
+            <span className="value">REFINED LUXURY</span>
           </div>
         </div>
       </div>

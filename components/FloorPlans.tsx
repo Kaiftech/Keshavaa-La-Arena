@@ -6,22 +6,22 @@ import Image from 'next/image';
 const FloorPlans = () => {
   const plans = [
     { 
-      type: 'Bespoke Residence', 
-      area: '3,200 SQ. FT.', 
+      type: '1BHK Residence', 
+      area: '100 SQM.', 
       img: '/assets/floor plan.jpg',
-      desc: 'An expansive layout designed for fluid movement between the private riverfront deck and the grand atrium.'
+      desc: 'A meticulously crafted 1BHK sanctuary designed for efficient luxury and fluid spatial harmony.'
     },
     { 
-      type: 'The Penthouse', 
-      area: '4,500 SQ. FT.', 
+      type: '2BHK Residence', 
+      area: '150 SQM.', 
       img: '/assets/floor plan penthouse.jpg',
-      desc: 'Elevated luxury with panoramic views of the Nerul River, featuring a private rooftop meditation garden.'
+      desc: 'Spacious 2BHK layout with curated living zones and a dedicated focus on technical precision.'
     },
     { 
-      type: 'Attic Collection', 
-      area: '2,800 SQ. FT.', 
+      type: '2BHK Penthouse', 
+      area: '250 SQM.', 
       img: '/assets/floor plan attic.jpg',
-      desc: 'A masterclass in spatial design, harmonizing heritage Goan geometry with modern technical precision.'
+      desc: 'The pinnacle of La Arena — a 2BHK Penthouse featuring an expansive private rooftop garden.'
     },
   ];
 

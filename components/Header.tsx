@@ -67,7 +67,7 @@ const Header = () => {
         .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent-primary); opacity: 0.3; }
 
         .nav-menu :global(a) {
-           font-family: var(--font-inter); font-size: 9px; font-weight: 800;
+           font-family: var(--font-inter); font-size: 10px; font-weight: 800;
            letter-spacing: 0.4em; text-transform: uppercase; text-decoration: none;
            color: ${scrolled ? 'var(--text-primary)' : '#ffffff'};
            transition: color 0.4s, opacity 0.4s;
@@ -80,7 +80,7 @@ const Header = () => {
         .btn-header {
            background: ${scrolled ? 'var(--bg-deep)' : 'var(--accent-primary)'};
            color: #fff; padding: 12px 24px; border-radius: 4px; border: none;
-           font-family: var(--font-inter); font-size: 9px; font-weight: 900;
+           font-family: var(--font-inter); font-size: 10px; font-weight: 900;
            letter-spacing: 0.3em; text-decoration: none; transition: all 0.3s;
            text-transform: uppercase;
         }
