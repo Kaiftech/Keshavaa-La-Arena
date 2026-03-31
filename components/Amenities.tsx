@@ -138,7 +138,7 @@ const Amenities = () => {
         }
         .map-wrapper:hover .map-text span {
            background: #ffffff; color: #000000; transform: translateY(-3px);
-           box-shadow: 0 10px 25px rgba(32, 178, 170, 0.3);
+           box-shadow: 0 10px 25px rgba(115, 172, 196, 0.3);
         }
         @keyframes float {
            0% { transform: translateY(0); }

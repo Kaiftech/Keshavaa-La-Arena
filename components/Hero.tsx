@@ -91,7 +91,7 @@ const Hero = () => {
         }
         .hero-headline span {
            font-family: var(--font-playfair); font-style: italic;
-           color: var(--accent-glow);
+           color: var(--accent-primary);
         }
         
         .hero-actions { 
@@ -106,7 +106,7 @@ const Hero = () => {
            font-size: 11px; letter-spacing: 4px; border-radius: 4px;
            text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
         }
-        .btn-modern:hover { transform: translateY(-5px); background: #ffffff; box-shadow: 0 15px 30px rgba(32, 178, 170, 0.2); }
+        .btn-modern:hover { transform: translateY(-5px); background: #ffffff; box-shadow: 0 15px 30px rgba(115, 172, 196, 0.2); }
 
         .separator { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
 
