@@ -35,7 +35,7 @@ const FloorPlans = () => {
                      Architectural <span>Layouts.</span>
                   </h2>
                </div>
-               <p className="desc">Bespoke spatial design optimized for the Nerul riverfront.</p>
+               <p className="desc">Bespoke spatial design optimized for the Nerul, Goa.</p>
             </div>
 
             <div className="floorplans-grid">
@@ -52,7 +52,6 @@ const FloorPlans = () => {
                         />
                         <div className="enquiry-overlay">
                            <div className="enquiry-badge">
-                              <span className="lock-icon">🔒</span>
                               ENQUIRE NOW
                            </div>
                            <p>Request Technical Blueprint</p>
@@ -112,12 +111,12 @@ const FloorPlans = () => {
            );
         }
         .plan-visual :global(.floor-img) {
-           filter: blur(8px) contrast(1.05) opacity(0.85);
+           filter: blur(5.5px) contrast(1.05) opacity(0.85);
            transition: all 0.6s ease;
            transform: scale(0.98);
         }
         .plan-visual:hover :global(.floor-img) {
-           filter: blur(8px) contrast(1.1) opacity(0.95);
+           filter: blur(6px) contrast(1.1) opacity(0.95);
            transform: scale(1.02);
         }
 
@@ -138,20 +137,18 @@ const FloorPlans = () => {
            padding: 15px 35px; border-radius: 4px; background: var(--accent-primary);
            color: #000; margin-bottom: 10px;
         }
-        .lock-icon { font-size: 18px; margin-bottom: 5px; opacity: 0.8; }
         .enquiry-overlay p { font-family: var(--font-inter); font-size: 9px; font-weight: 800; letter-spacing: 2px; opacity: 0.8; text-transform: uppercase; }
 
         .floorplan-info { text-align: center; }
         .area {
-           display: block; font-family: var(--font-inter); font-size: 10px; font-weight: 800;
-           letter-spacing: 4px; color: var(--accent-primary); margin-bottom: 10px;
-           text-transform: uppercase;
+           display: block; font-family: var(--font-inter); font-size: 16px; font-weight: normal;
+           color: var(--accent-primary); margin-bottom: 10px; line-height: 1.6;
         }
         .type {
-           font-family: var(--font-playfair); font-size: 24px; line-height: 1.2;
-           color: var(--text-primary); margin-bottom: 10px; font-style: italic;
+           font-family: var(--font-inter); font-size: 32px; font-weight: bold; line-height: 1.2;
+           color: var(--text-primary); margin-bottom: 10px; letter-spacing: -1px;
         }
-        .summary { font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 0 10px; }
+        .summary { font-family: var(--font-inter); font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding: 0 10px; }
         .action { margin-top: 20px; }
         .unlock-btn {
            font-family: var(--font-inter); font-size: 10px; font-weight: 900;
