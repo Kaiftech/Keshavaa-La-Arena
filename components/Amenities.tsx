@@ -35,7 +35,7 @@ const Amenities = () => {
            </div>
            <a href="#enquire" className="map-wrapper">
               <iframe 
-                 src="https://maps.google.com/maps?q=Nerul,+Goa&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                 src="https://maps.google.com/maps?q=Nerul,+Goa&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                  width="100%" 
                  height="100%" 
                  style={{ border: 0, pointerEvents: 'none' }} 
@@ -98,7 +98,7 @@ const Amenities = () => {
         }
 
         .location-map {
-           margin-top: 160px;
+           margin-top: 150px;
         }
         .map-text-header {
            text-align: center; margin-bottom: 40px;
@@ -138,7 +138,7 @@ const Amenities = () => {
         }
         .map-wrapper:hover .map-text span {
            background: #ffffff; color: #000000; transform: translateY(-3px);
-           box-shadow: 0 10px 25px rgba(5, 124, 121, 0.3);
+           box-shadow: 0 10px 25px rgba(115, 172, 196, 0.3);
         }
         @keyframes float {
            0% { transform: translateY(0); }

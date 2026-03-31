@@ -4,11 +4,11 @@
   /* Keshavaa Modern Aqua Palette - NEW IDENTITY */
   --bg-creme: #F7FAFA;     /* Pristine Mint Tint */
   --bg-deep: #081617;      /* Deep Midnight Teal */
-  --accent-primary: #057c79; /* Dark Sophisticated Teal */
+  --accent-primary: #73acc4; /* Custom Blue */
   --accent-glow: #40E0D0;    /* Turquoise Glow */
   --text-primary: #081617; 
   --text-secondary: #4A6363;
-  --border-subtle: rgba(5, 124, 121, 0.15);
+  --border-subtle: rgba(115, 172, 196, 0.15);
   
   --font-playfair: 'Playfair Display', serif;
   --font-inter: 'Inter', sans-serif;
