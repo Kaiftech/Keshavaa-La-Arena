@@ -51,13 +51,12 @@ export const ImageAutoSlider = ({
         .image-item {
           transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
           flex-shrink: 0;
-          width: 900px;
           height: 600px;
           border-radius: 4px;
           overflow: hidden;
           border: 1px solid var(--border-subtle);
-          background: #f8f8f8;
           cursor: pointer;
+          display: block;
         }
 
         .image-item:hover {
@@ -66,22 +65,16 @@ export const ImageAutoSlider = ({
         }
 
         @media (max-width: 1024px) {
-          .image-item {
-            width: 700px;
-            height: 466px;
-          }
+          .image-item { height: 466px; }
         }
 
         @media (max-width: 768px) {
-          .image-item {
-            width: 400px;
-            height: 266px;
-          }
+          .image-item { height: 266px; }
           .infinite-scroll { gap: 15px; }
         }
       `}</style>
       
-      <div className="w-full relative overflow-hidden py-4">
+      <div className="w-full relative py-4">
         <div className="scroll-container">
           <div className="infinite-scroll">
             {duplicatedImages.map((image, index) => (
@@ -93,7 +86,7 @@ export const ImageAutoSlider = ({
                 <img
                   src={image}
                   alt={`Gallery Detail ${(index % images.length) + 1}`}
-                  className="w-full h-full object-contain"
+                  style={{ height: '100%', width: 'auto', display: 'block' }}
                   loading="lazy"
                 />
               </a>

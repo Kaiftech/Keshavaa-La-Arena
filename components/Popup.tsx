@@ -55,8 +55,7 @@ const Popup = () => {
     e.preventDefault();
     if (validate()) {
       console.log('Lead Captured:', formData);
-      alert('Thank you. A Keshavaa Specialist will contact you shortly.');
-      closePopup();
+      window.location.href = '/thankyou';
     }
   };
 
@@ -83,17 +82,17 @@ const Popup = () => {
           </div>
           <div className="input-group">
             <input 
-              type="text" name="city" placeholder="YOUR CITY" 
-              required value={formData.city} onChange={handleInputChange}
-            />
-            {errors.city && <span className="error">{errors.city}</span>}
-          </div>
-          <div className="input-group">
-            <input 
               type="tel" name="phone" placeholder="PHONE NUMBER" 
               required value={formData.phone} onChange={handleInputChange}
             />
             {errors.phone && <span className="error">{errors.phone}</span>}
+          </div>
+          <div className="input-group">
+            <input 
+              type="text" name="city" placeholder="YOUR CITY" 
+              required value={formData.city} onChange={handleInputChange}
+            />
+            {errors.city && <span className="error">{errors.city}</span>}
           </div>
           <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city}>REQUEST INVITE</button>
         </form>

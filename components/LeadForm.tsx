@@ -3,12 +3,15 @@
 import React, { useState } from 'react';
 
 const LeadForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', city: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+    setTimeout(() => {
+      window.location.href = '/thankyou';
+    }, 400);
   };
 
   return (
@@ -46,17 +49,6 @@ const LeadForm = () => {
             
             <div className="form-row">
                <div className="form-group">
-                 <label>OFFICIAL EMAIL</label>
-                 <input 
-                   type="email" 
-                   placeholder="principle@estate.com" 
-                   required
-                   value={formData.email}
-                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                 />
-               </div>
-               
-               <div className="form-group">
                  <label>DIRECT TELEPHONE</label>
                  <input 
                    type="tel" 
@@ -64,6 +56,17 @@ const LeadForm = () => {
                    required
                    value={formData.phone}
                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                 />
+               </div>
+               
+               <div className="form-group">
+                 <label>CITY</label>
+                 <input 
+                   type="text" 
+                   placeholder="Your City" 
+                   required
+                   value={formData.city}
+                   onChange={(e) => setFormData({...formData, city: e.target.value})}
                  />
                </div>
             </div>

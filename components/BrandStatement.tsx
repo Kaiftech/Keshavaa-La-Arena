@@ -15,10 +15,7 @@ const BrandStatement = () => {
              We built La Arena as a tribute to modern Goan living. It’s a simple, honest space in the heart of Nerul—where local heritage meets contemporary comfort, and the design feels as steady and serene as the heritage village it honors.
           </p>
           
-          <div className="heritage-seal">
-             <div className="seal-circle">GOA</div>
-             <span>EST'D 1984 - NERUL VILLAGE heritage core</span>
-          </div>
+          {/* Heritage seal removed as requested */}
         </div>
       </div>
 

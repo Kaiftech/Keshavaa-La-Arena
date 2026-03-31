@@ -35,6 +35,12 @@ const Footer = () => {
             <span className="label">CONTACT</span>
             <div className="legal-data">
               <p>Nerul Riviera, Goa</p>
+              <p>
+                 <a href="tel:+916262962621" className="contact-link">+91 62629 62621</a>
+              </p>
+              <p>
+                 <a href="https://wa.me/916262962621" target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp: +91 62629 62621</a>
+              </p>
               <div className="cta-area">
                  <a href="#enquire" className="footer-btn">Get In Touch</a>
               </div>
@@ -83,6 +89,13 @@ const Footer = () => {
         .legal-data p {
            font-family: var(--font-inter); font-size: 14px;
            color: rgba(255,255,255,0.6); margin-bottom: 10px;
+        }
+
+        .contact-link {
+           color: inherit; text-decoration: none; transition: color 0.3s ease;
+        }
+        .contact-link:hover {
+           color: var(--accent-primary);
         }
 
         .cta-area { margin-top: 25px; }

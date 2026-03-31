@@ -30,6 +30,8 @@ export const metadata: Metadata = {
   },
 };
 
+import FloatingCTA from "@/components/FloatingCTA";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +39,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <FloatingCTA />
+      </body>
     </html>
   );
 }
