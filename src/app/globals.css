@@ -1,0 +1,125 @@
+/* 
+  Keshavaa La Arena - Coastal Beige & Aqua Luxury
+*/
+
+:root {
+  --base-beige: #F5F2ED;
+  --bright-aqua: #00D1C1;
+  --gold: #D4AF37;
+  --dark-slate: #1E293B;
+  --white: #FFFFFF;
+  --slate-light: #475569;
+  
+  --serif-font: var(--font-serif);
+  --sans-font: var(--font-sans);
+  
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --breezy-glass: rgba(255, 255, 255, 0.7);
+  --aqua-glass: rgba(0, 209, 193, 0.1);
+  --shadow-soft: 0 10px 30px -10px rgba(30, 41, 59, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--base-beige);
+  color: var(--dark-slate);
+  font-family: var(--sans-font);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .serif {
+  font-family: var(--serif-font);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--dark-slate);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* UI Utilities */
+.glass-effect {
+  background: var(--breezy-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Buttons & CTAs */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  font-family: var(--sans-font);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  font-size: 0.8rem;
+  border-radius: 50px; /* More coastal/organic feel */
+}
+
+.btn-gold-border {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: transparent;
+}
+
+.btn-gold-border:hover {
+  background: var(--gold);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px var(--gold);
+}
+
+.btn-gold-filled {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+
+.btn-gold-filled:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -10px var(--gold);
+}
+
+.btn-whatsapp {
+  background: var(--bright-aqua);
+  color: white;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-whatsapp:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -8px var(--bright-aqua);
+}
