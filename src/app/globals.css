@@ -1,5 +1,5 @@
 /* 
-  Keshavaa La Arena - Coastal Beige & Aqua Luxury
+  Keshavaa La Arena - hiiiiii Coastal Beige & Aqua Luxury
 */
 
 :root {
@@ -9,10 +9,10 @@
   --dark-slate: #1E293B;
   --white: #FFFFFF;
   --slate-light: #475569;
-  
+
   --serif-font: var(--font-serif);
   --sans-font: var(--font-sans);
-  
+
   --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --breezy-glass: rgba(255, 255, 255, 0.7);
   --aqua-glass: rgba(0, 209, 193, 0.1);
@@ -39,7 +39,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .serif {
+h1,
+h2,
+h3,
+.serif {
   font-family: var(--serif-font);
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -81,7 +84,8 @@ img {
   text-decoration: none;
   border: 1.5px solid transparent;
   font-size: 0.8rem;
-  border-radius: 50px; /* More coastal/organic feel */
+  border-radius: 50px;
+  /* More coastal/organic feel */
 }
 
 .btn-gold-border {
