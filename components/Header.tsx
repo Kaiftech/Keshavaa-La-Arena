@@ -51,7 +51,7 @@ const Header = () => {
         }
         .modern-header.scrolled {
            padding: 15px 0; background: rgba(255, 255, 255, 0.9);
-           backdrop-filter: blur(25px); border-bottom: 1px solid rgba(115, 172, 196, 0.08);
+           backdrop-filter: blur(25px); border-bottom: 1px solid rgba(5, 124, 121, 0.08);
            box-shadow: 0 5px 30px rgba(8, 22, 23, 0.03);
         }
         .header-inner {
@@ -86,7 +86,7 @@ const Header = () => {
         }
         .btn-header:hover {
            background: var(--accent-glow); transform: translateY(-2px);
-           box-shadow: 0 5px 15px rgba(115, 172, 196, 0.2);
+           box-shadow: 0 5px 15px rgba(5, 124, 121, 0.2);
         }
 
         @media (max-width: 1024px) {

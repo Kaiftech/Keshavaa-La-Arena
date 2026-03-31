@@ -4,38 +4,38 @@ import React from 'react';
 import Image from 'next/image';
 
 const Hero = () => {
-  return (
-    <section id="hero" className="hero-section">
-      {/* Immersive Background Visual */}
-      <div className="hero-bg">
-        <Image 
-          src="/assets/bulding3.png" 
-          alt="Keshavaa La Arena" 
-          fill 
-          priority
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-          className="hero-img"
-          sizes="100vw"
-        />
-        {/* Cinematic Noir Depth */}
-        <div className="hero-overlay" />
-      </div>
+   return (
+      <section id="hero" className="hero-section">
+         {/* Immersive Background Visual */}
+         <div className="hero-bg">
+            <Image
+               src="/assets/bulding3.png"
+               alt="Keshavaa La Arena"
+               fill
+               priority
+               style={{ objectFit: 'cover', objectPosition: 'center' }}
+               className="hero-img"
+               sizes="100vw"
+            />
+            {/* Cinematic Noir Depth */}
+            <div className="hero-overlay" />
+         </div>
 
-      <div className="container hero-container">
-        <div className="hero-content" style={{ marginTop: '60px' }}>
-          <span className="hero-eyebrow">PRIVATE ESCAPISM</span>
-          <h1 className="hero-headline">
-             LA <span>ARENA.</span>
-          </h1>
+         <div className="container hero-container">
+            <div className="hero-content" style={{ marginTop: '60px', position: 'relative' }}>
+               <span className="hero-eyebrow">PRIVATE ESCAPISM</span>
+               <h1 className="hero-headline">
+                  LA <span>ARENA</span>
+               </h1>
 
-          <div className="hero-actions">
-             <a href="#enquire" className="btn-modern w-full md:w-auto text-center block">ENQUIRE NOW</a>
-          </div>
-        </div>
-      </div>
+               <div className="hero-actions">
+                  <a href="#enquire" className="btn-modern w-full md:w-auto text-center block">ENQUIRE NOW</a>
+               </div>
+            </div>
+         </div>
 
 
-      <style jsx>{`
+         <style jsx>{`
         .hero-section {
            position: relative; height: 92vh; min-height: 700px;
            display: flex; align-items: center; justify-content: center;
@@ -43,7 +43,7 @@ const Hero = () => {
         }
         .hero-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
         .hero-img { 
-          filter: brightness(0.55) saturate(0.85);
+          filter: brightness(0.35) saturate(0.85);
           animation: atmosphericZoom 30s infinite alternate linear;
         }
         .hero-overlay {
@@ -70,6 +70,15 @@ const Hero = () => {
 
         .hero-container { position: relative; z-index: 30; text-align: center; width: 100%; max-width: 1200px; padding: 0 20px; }
         
+        .hero-content {
+           background: rgba(8, 22, 23, 0.22);
+           backdrop-filter: blur(3px);
+           border: 1px solid rgba(255, 255, 255, 0.05);
+           border-left: 3px solid var(--accent-primary);
+           padding: 30px 50px;
+           display: inline-block;
+        }
+
         .hero-arch-ledger {
            display: flex; align-items: center; justify-content: center; gap: 15px;
            font-family: var(--font-inter); font-size: 10px; font-weight: 800;
@@ -80,8 +89,8 @@ const Hero = () => {
 
         .hero-eyebrow {
            display: block; font-family: var(--font-inter); font-size: 12px; font-weight: 800;
-           letter-spacing: 0.8em; color: var(--accent-primary); margin-bottom: 25px;
-           opacity: 0.8;
+           letter-spacing: 0.8em; color: #ffffff; margin-bottom: 25px;
+           opacity: 0.9;
         }
 
         .hero-headline {
@@ -99,14 +108,15 @@ const Hero = () => {
            opacity: 0; animation: revealIn 1s 1s forwards;
            width: 100%; max-width: 400px; margin: 0 auto;
         }
+        
 
         .btn-modern {
-           background: var(--accent-primary); color: #000;
+           background: var(--accent-primary); color: #ffffff;
            padding: 20px 50px; font-family: var(--font-inter); font-weight: 900;
            font-size: 11px; letter-spacing: 4px; border-radius: 4px;
-           text-decoration: none; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+           text-decoration: none; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .btn-modern:hover { transform: translateY(-5px); background: #ffffff; box-shadow: 0 15px 30px rgba(115, 172, 196, 0.2); }
+        .btn-modern:hover { transform: translateY(-5px); background: #ffffff; color: #000; box-shadow: 0 15px 30px rgba(5, 124, 121, 0.2); }
 
         .separator { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
 
@@ -132,14 +142,15 @@ const Hero = () => {
         }
         @media (max-width: 768px) {
            .hero-section { min-height: 80vh; }
+           .hero-content { padding: 25px 20px; width: 100%; }
            .hero-headline { font-size: 60px; line-height: 1; margin-bottom: 40px; }
            .hero-actions { flex-direction: column; width: 100%; padding: 0 10px; }
            .btn-modern { padding: 20px; font-size: 12px; }
            .separator { display: none; }
         }
       `}</style>
-    </section>
-  );
+      </section>
+   );
 };
 
 export default Hero;

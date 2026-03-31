@@ -16,7 +16,7 @@ const Amenities = () => {
         <div className="curated-features">
           <div className="map-text-header">
              <span className="eyebrow">SIGNATURE LIFESTYLE</span>
-             <h2 className="title">Curated <span>Features.</span></h2>
+             <h2 className="title">Signature <span>Features.</span></h2>
           </div>
           <ul className="features-list">
             <li><span className="bullet"></span>River facing Rooftop Infinity Pool</li>
@@ -98,7 +98,7 @@ const Amenities = () => {
         }
 
         .location-map {
-           margin-top: 100px;
+           margin-top: 160px;
         }
         .map-text-header {
            text-align: center; margin-bottom: 40px;
@@ -138,7 +138,7 @@ const Amenities = () => {
         }
         .map-wrapper:hover .map-text span {
            background: #ffffff; color: #000000; transform: translateY(-3px);
-           box-shadow: 0 10px 25px rgba(115, 172, 196, 0.3);
+           box-shadow: 0 10px 25px rgba(5, 124, 121, 0.3);
         }
         @keyframes float {
            0% { transform: translateY(0); }
