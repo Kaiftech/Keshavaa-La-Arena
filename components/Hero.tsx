@@ -27,6 +27,10 @@ const Hero = () => {
                <h1 className="hero-headline">
                   LA <span>ARENA</span>
                </h1>
+               <h2 className="sr-only">
+                 Luxury river-facing apartments in Nerul, Goa. 1, 2, 3 & 4 BHK residences by Keshavaa Developers. 
+                 Premium real estate with rooftop infinity pool and modern amenities.
+               </h2>
 
                <div className="hero-actions">
                   <a href="#enquire" className="btn-modern w-full md:w-auto text-center block">ENQUIRE NOW</a>
@@ -44,7 +48,6 @@ const Hero = () => {
         .hero-bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
         .hero-img { 
           filter: brightness(0.35) saturate(0.85);
-          animation: atmosphericZoom 30s infinite alternate linear;
         }
         .hero-overlay {
            position: absolute; inset: 0;

@@ -6,12 +6,42 @@ const LeadForm = () => {
   const [formData, setFormData] = useState({ name: '', city: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      window.location.href = '/thankyou';
-    }, 400);
+    
+    // CRM Mapping: Name->name, Mobile->mobile, Remark->city, Source->source
+    const payload = {
+      name: formData.name,
+      mobile: formData.phone,
+      city: formData.city,
+      source: "Website LeadForm",
+      project: "Keshavaa La Arena",
+      refId: "LA-ARENA-01"
+    };
+
+    try {
+      // Using no-cors to handle the connector endpoint safely in browser
+      await fetch('https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      
+      setSubmitted(true);
+      setTimeout(() => {
+        window.location.href = '/thankyou';
+      }, 1000);
+    } catch (error) {
+      console.error('Lead submission failed:', error);
+      // Fallback for user experience
+      setSubmitted(true);
+      setTimeout(() => {
+        window.location.href = '/thankyou';
+      }, 1000);
+    }
   };
 
   return (

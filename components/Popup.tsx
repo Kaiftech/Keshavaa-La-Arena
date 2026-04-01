@@ -51,11 +51,34 @@ const Popup = () => {
     if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Lead Captured:', formData);
-      window.location.href = '/thankyou';
+      // CRM Mapping: Name->name, Mobile->mobile, Remark->city, Source->source
+      const payload = {
+        name: formData.name,
+        mobile: formData.phone,
+        city: formData.city,
+        source: "Website Popup",
+        project: "Keshavaa La Arena",
+        refId: "LA-ARENA-POPUP"
+      };
+
+      try {
+        await fetch('https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        
+        window.location.href = '/thankyou';
+      } catch (error) {
+        console.error('Lead submission failed:', error);
+        window.location.href = '/thankyou';
+      }
     }
   };
 
