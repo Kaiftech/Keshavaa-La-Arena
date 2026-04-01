@@ -60,8 +60,7 @@ const Popup = () => {
         mobile: formData.phone,
         city: formData.city,
         source: "Website Popup",
-        project: "Keshavaa La Arena",
-        refId: "LA-ARENA-POPUP"
+        project: "Keshavaa La Arena"
       };
 
       try {

@@ -15,8 +15,7 @@ const LeadForm = () => {
       mobile: formData.phone,
       city: formData.city,
       source: "Website LeadForm",
-      project: "Keshavaa La Arena",
-      refId: "LA-ARENA-01"
+      project: "Keshavaa La Arena"
     };
 
     try {
