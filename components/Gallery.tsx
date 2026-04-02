@@ -6,10 +6,16 @@ import { ImageAutoSlider } from "./ui/image-auto-slider";
 const Gallery = () => {
    const allImages = [
       "/assets/bulding1.png",
+      "/assets/1s.jpg",
       "/assets/bulding2.png",
+      "/assets/2s.jpg",
       "/assets/bulding3.png",
+      "/assets/3s.jpg",
       "/assets/bulding4.png",
-      "/assets/bulding5.png"
+      "/assets/4s.jpg",
+      "/assets/bulding5.png",
+      "/assets/5s.jpg",
+      "/assests/6s.jpg"
    ];
 
    return (
