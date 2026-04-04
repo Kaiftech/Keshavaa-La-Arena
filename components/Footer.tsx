@@ -45,7 +45,17 @@ const Footer = () => {
                   <div className="contact-icon-wrap">
                     <Phone size={14} className="contact-icon" strokeWidth={2.5} />
                   </div>
-                  <a href="tel:+916262962621" className="contact-link">+91 6262 9 6262 1</a>
+                  <a 
+                    href="tel:+916262962621" 
+                    className="contact-link"
+                    onClick={() => {
+                      if (typeof (window as any).gtag_report_conversion !== 'undefined') {
+                        (window as any).gtag_report_conversion('tel:+916262962621');
+                      }
+                    }}
+                  >
+                    +91 6262 9 6262 1
+                  </a>
                 </div>
                 <div className="contact-item">
                   <div className="contact-icon-wrap">

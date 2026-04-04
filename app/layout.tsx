@@ -62,6 +62,26 @@ export default function RootLayout({
           `
         }} />
         {/* End Google tag */}
+
+        {/* Click to Call Conversion Snippet */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-18017530682/b7O3CPOJw5UcELrmto9D',
+                  'value': 1.0,
+                  'currency': 'INR',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          `
+        }} />
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}
