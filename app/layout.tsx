@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 };
 
 import FloatingCTA from "@/components/FloatingCTA";
+import StickyMobileBar from "@/components/StickyMobileBar";
 
 export default function RootLayout({
   children,
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body>
         {children}
         <FloatingCTA />
+        <StickyMobileBar />
       </body>
     </html>
   );

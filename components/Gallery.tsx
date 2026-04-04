@@ -15,7 +15,7 @@ const Gallery = () => {
       "/assets/4s.jpg",
       "/assets/bulding5.png",
       "/assets/5s.jpg",
-      "/assests/6s.jpg"
+      "/assets/6s.jpg"
    ];
 
    return (

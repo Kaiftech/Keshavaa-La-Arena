@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const Popup = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -11,23 +12,58 @@ const Popup = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
+  const showPopup = useCallback(() => {
+    if (!isDismissed) {
       setIsVisible(true);
-    }, 1200);
+    }
+  }, [isDismissed]);
 
+  useEffect(() => {
+    // 1. Time delay: 8 seconds
+    const timer = setTimeout(() => {
+      showPopup();
+    }, 8000);
+
+    // 2. Scroll trigger: 35%
+    const handleScroll = () => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      if (scrollPercent > 35) {
+        showPopup();
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    // 3. Exit Intent (Desktop only)
+    const handleExitIntent = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        showPopup();
+        document.removeEventListener('mouseleave', handleExitIntent);
+      }
+    };
+
+    // 4. Hash trigger
     const handleHashChange = () => {
       if (window.location.hash === '#enquire') {
         setIsVisible(true);
       }
     };
 
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mouseleave', handleExitIntent);
     window.addEventListener('hashchange', handleHashChange);
+    
+    // Check initial hash
+    if (window.location.hash === '#enquire') {
+        setIsVisible(true);
+    }
+
     return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mouseleave', handleExitIntent);
       window.removeEventListener('hashchange', handleHashChange);
       clearTimeout(timer);
     };
-  }, []);
+  }, [showPopup]);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
@@ -40,6 +76,7 @@ const Popup = () => {
 
   const closePopup = () => {
     setIsVisible(false);
+    setIsDismissed(true);
     if (window.location.hash === '#enquire') {
       window.history.replaceState(null, '', ' ');
     }
@@ -54,7 +91,6 @@ const Popup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      // CRM Mapping: Name->name, Mobile->mobile, Remark->city, Source->source
       const payload = {
         name: formData.name,
         mobile: formData.phone,
@@ -89,9 +125,9 @@ const Popup = () => {
         <button className="close-btn" onClick={closePopup}>✕</button>
         
         <div className="popup-header">
-           <span className="eyebrow">PRIVATE ACCESS</span>
-           <h2 className="title">Request <span>Invitation.</span></h2>
-           <p className="desc">Register for a private viewing of our bespoke Goa residences.</p>
+           <span className="eyebrow">LIMITED INVITATION</span>
+           <h2 className="title">Get <span>Price List.</span></h2>
+           <p className="desc">Before you go — download the official brochure and availability list for La Arena, Goa.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="popup-form">
@@ -116,8 +152,17 @@ const Popup = () => {
             />
             {errors.city && <span className="error">{errors.city}</span>}
           </div>
-          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city}>REQUEST INVITE</button>
+          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city}>DOWNLOAD BROCHURE</button>
         </form>
+
+        <div className="social-proof">
+            <div className="avatar-group">
+                <div className="avatar">JS</div>
+                <div className="avatar">RK</div>
+                <div className="avatar">MP</div>
+            </div>
+            <p>Join 200+ families who've already enquired</p>
+        </div>
 
         <p className="footer-note">EXCLUSIVE KESHAVAA SIGNATURE ESTATE</p>
       </div>
@@ -138,7 +183,7 @@ const Popup = () => {
         }
 
         .close-btn {
-          position: absolute; top: 20px; right: 20px;
+          position: absolute; top: 30px; right: 30px;
           background: none; border: none; font-size: 20px;
           cursor: pointer; color: var(--text-primary); opacity: 0.3;
           transition: opacity 0.3s;
@@ -183,6 +228,29 @@ const Popup = () => {
           margin-top: 10px;
         }
         .submit-btn:hover { background: var(--bg-deep); transform: translateY(-3px); }
+
+        .social-proof {
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #fdfaf5;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .avatar-group { display: flex; }
+        .avatar {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: var(--accent-primary); color: #fff;
+            font-size: 8px; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #fff; margin-right: -8px;
+        }
+        .social-proof p {
+            font-family: var(--font-inter); font-size: 11px;
+            font-weight: 600; color: var(--text-secondary);
+        }
 
         .footer-note {
            text-align: center; margin-top: 30px; font-family: var(--font-inter);

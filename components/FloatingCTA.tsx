@@ -4,14 +4,12 @@ import React from 'react';
 
 export default function FloatingCTA() {
   return (
-      <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div className="floating-cta-container">
       <a 
         href="https://wa.me/916262962621" 
         target="_blank" 
         rel="noopener noreferrer"
-        style={{ width: '56px', height: '56px', backgroundColor: '#25D366', color: '#fff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', transition: 'transform 0.3s ease' }}
-        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        className="cta-btn whatsapp"
         aria-label="Chat on WhatsApp"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#ffffff">
@@ -20,15 +18,32 @@ export default function FloatingCTA() {
       </a>
       <a 
         href="tel:+916262962621" 
-        style={{ width: '56px', height: '56px', backgroundColor: 'var(--accent-primary)', color: '#fff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', transition: 'transform 0.3s ease' }}
-        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        className="cta-btn call"
         aria-label="Call Now"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
       </a>
+
+      <style jsx>{`
+        .floating-cta-container {
+            position: fixed; bottom: 24px; right: 24px; z-index: 9999; 
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .cta-btn {
+            width: 56px; height: 56px; color: #fff; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.3s ease;
+        }
+        .cta-btn:hover { transform: scale(1.1); }
+        .whatsapp { background-color: #25D366; }
+        .call { background-color: var(--accent-primary); }
+
+        @media (max-width: 768px) {
+            .floating-cta-container { display: none; }
+        }
+      `}</style>
     </div>
   );
 }
