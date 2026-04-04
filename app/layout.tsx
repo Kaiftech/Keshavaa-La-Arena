@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <head>
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager (GTM) */}
         <script dangerouslySetInnerHTML={{
           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -49,7 +49,19 @@ export default function RootLayout({
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-NKLCMNCQ');`
         }} />
-        {/* End Google Tag Manager */}
+        {/* End GTM */}
+
+        {/* Google tag (gtag.js) - Conversion Tracking */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18017530682" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18017530682');
+          `
+        }} />
+        {/* End Google tag */}
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}
