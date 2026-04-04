@@ -29,17 +29,17 @@ const Header = () => {
         </Link>
         
         <nav className="nav-menu">
-          <Link href="#hero">COLLECTION</Link>
+          <Link href="/#hero">COLLECTION</Link>
           <div className="dot" />
-          <Link href="#amenities">LIFESTYLE</Link>
+          <Link href="/#amenities">LIFESTYLE</Link>
           <div className="dot" />
-          <Link href="#gallery">ARCHIVE</Link>
+          <Link href="/#gallery">ARCHIVE</Link>
           <div className="dot" />
-          <Link href="#floorplans">LAYOUTS</Link>
+          <Link href="/#floorplans">LAYOUTS</Link>
         </nav>
 
         <div className="header-actions">
-           <a href="#enquire" className="btn-header">SECURE ACCESS</a>
+           <a href="/#enquire" className="btn-header">SECURE ACCESS</a>
         </div>
       </div>
 

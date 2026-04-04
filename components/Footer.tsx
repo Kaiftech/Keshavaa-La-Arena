@@ -25,9 +25,10 @@ const Footer = () => {
           <div className="footer-nav reveal" style={{ animationDelay: '0.1s' }}>
             <span className="label">NAVIGATE</span>
             <ul className="footer-links">
-              <li><Link href="#hero">Collection</Link></li>
-              <li><Link href="#amenities">Lifestyle</Link></li>
-              <li><Link href="#gallery">Archive</Link></li>
+              <li><Link href="/#hero">Collection</Link></li>
+              <li><Link href="/#amenities">Lifestyle</Link></li>
+              <li><Link href="/#gallery">Archive</Link></li>
+              <li><Link href="/privacy-policy">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -67,7 +68,7 @@ const Footer = () => {
                 </div>
               </div>
               <div className="cta-area">
-                <a href="#enquire" className="footer-btn">Get In Touch</a>
+                <a href="/#enquire" className="footer-btn">Get In Touch</a>
               </div>
             </div>
           </div>
