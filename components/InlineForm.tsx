@@ -5,9 +5,12 @@ import React, { useState } from 'react';
 const InlineForm = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', city: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     
     const payload = {
       name: formData.name,
@@ -78,7 +81,7 @@ const InlineForm = () => {
                 value={formData.city}
                 onChange={(e) => setFormData({...formData, city: e.target.value})}
               />
-              <button type="submit" className="inline-submit">RECEIVE BROCHURE</button>
+              <button type="submit" className="inline-submit" disabled={isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'RECEIVE BROCHURE'}</button>
             </form>
           </div>
         )}
@@ -172,6 +175,7 @@ const InlineForm = () => {
           color: #081617;
           transform: translateY(-2px);
         }
+        .inline-submit:disabled { opacity: 0.6; cursor: not-allowed; }
         .success-message {
           text-align: center;
           padding: 40px 0;

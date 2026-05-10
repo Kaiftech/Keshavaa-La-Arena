@@ -5,9 +5,12 @@ import React, { useState } from 'react';
 const LeadForm = () => {
   const [formData, setFormData] = useState({ name: '', city: '', phone: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     
     // CRM Mapping: Name->name, Mobile->mobile, Remark->city, Source->source
     const payload = {
@@ -100,8 +103,8 @@ const LeadForm = () => {
                </div>
             </div>
 
-            <button type="submit" className="submit-btn">
-               REGISTER INTEREST <span className="arrow">→</span>
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+               {isSubmitting ? 'SUBMITTING...' : 'REGISTER INTEREST'} <span className="arrow">→</span>
             </button>
           </form>
 
@@ -262,6 +265,7 @@ const LeadForm = () => {
         }
 
         .submit-btn:hover { background: var(--gold-muted); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .submit-btn .arrow { margin-left: 16px; transition: transform 0.3s; }
         .submit-btn:hover .arrow { transform: translateX(5px); }
 

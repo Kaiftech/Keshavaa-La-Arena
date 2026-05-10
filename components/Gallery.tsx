@@ -5,17 +5,17 @@ import { ImageAutoSlider } from "./ui/image-auto-slider";
 
 const Gallery = () => {
    const allImages = [
-      "/assets/bulding1.png",
-      "/assets/1s.jpg",
-      "/assets/bulding2.png",
-      "/assets/2s.jpg",
-      "/assets/bulding3.png",
-      "/assets/3s.jpg",
-      "/assets/bulding4.png",
-      "/assets/4s.jpg",
-      "/assets/bulding5.png",
-      "/assets/5s.jpg",
-      "/assets/6s.jpg"
+      "/assets/bulding1.webp",
+      "/assets/1s.webp",
+      "/assets/bulding2.webp",
+      "/assets/2s.webp",
+      "/assets/bulding3.webp",
+      "/assets/3s.webp",
+      "/assets/bulding4.webp",
+      "/assets/4s.webp",
+      "/assets/bulding5.webp",
+      "/assets/5s.webp",
+      "/assets/6s.webp"
    ];
 
    return (

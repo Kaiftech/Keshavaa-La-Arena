@@ -13,7 +13,7 @@ const Footer = () => {
           <div className="footer-brand reveal">
             <div className="logo-wrap">
               <Image
-                src="/assets/keshavaa.blue1.png"
+                src="/assets/keshavaa.blue1.webp"
                 alt="Keshavaa Luxury"
                 width={160}
                 height={55}

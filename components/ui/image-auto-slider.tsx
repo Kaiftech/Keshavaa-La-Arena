@@ -8,11 +8,11 @@ interface ImageAutoSliderProps {
 
 export const ImageAutoSlider = ({ 
   images = [
-    "/assets/bulding1.png",
-    "/assets/bulding2.png",
-    "/assets/bulding3.png",
-    "/assets/bulding4.png",
-    "/assets/bulding5.png"
+    "/assets/bulding1.webp",
+    "/assets/bulding2.webp",
+    "/assets/bulding3.webp",
+    "/assets/bulding4.webp",
+    "/assets/bulding5.webp"
   ]
 }: ImageAutoSliderProps) => {
   // Duplicate images for seamless loop

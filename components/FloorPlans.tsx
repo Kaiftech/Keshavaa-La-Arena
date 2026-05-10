@@ -8,19 +8,19 @@ const FloorPlans = () => {
       {
          type: '1 BHK',
          area: '65 – 110 SQ.M.',
-         img: '/assets/floor plan.jpg',
+         img: '/assets/floor plan.webp',
          desc: 'Smartly designed for effortless living, perfect as a holiday home or a high-yield investment in Goa.'
       },
       {
          type: '2 BHK',
          area: '100 – 140 SQ.M.',
-         img: '/assets/floor plan penthouse.jpg',
+         img: '/assets/floor plan penthouse.webp',
          desc: 'Spacious layouts with thoughtfully defined living zones—ideal for families, longer stays, and elevated comfort.'
       },
       {
          type: '2 BHK Penthouse',
          area: '180 SQ.M.',
-         img: '/assets/floor plan attic.jpg',
+         img: '/assets/floor plan attic.webp',
          desc: 'An elevated living experience with your own private rooftop—crafted for those who want space, privacy, and a statement lifestyle.'
       },
    ];

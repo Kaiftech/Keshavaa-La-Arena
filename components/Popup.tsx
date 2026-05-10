@@ -11,6 +11,7 @@ const Popup = () => {
     city: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const showPopup = useCallback(() => {
     if (!isDismissed) {
@@ -90,7 +91,9 @@ const Popup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     if (validate()) {
+      setIsSubmitting(true);
       const payload = {
         name: formData.name,
         mobile: formData.phone,
@@ -152,7 +155,7 @@ const Popup = () => {
             />
             {errors.city && <span className="error">{errors.city}</span>}
           </div>
-          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city}>DOWNLOAD BROCHURE</button>
+          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city || isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'DOWNLOAD BROCHURE'}</button>
         </form>
 
         <div className="social-proof">
@@ -228,6 +231,7 @@ const Popup = () => {
           margin-top: 10px;
         }
         .submit-btn:hover { background: var(--bg-deep); transform: translateY(-3px); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .social-proof {
             margin-top: 25px;

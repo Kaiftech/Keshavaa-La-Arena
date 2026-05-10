@@ -20,7 +20,7 @@ const Header = () => {
       <div className="container header-inner">
         <Link href="/" className="logo-wrap">
           <Image 
-            src="/assets/keshavaa.blue1.png" 
+            src="/assets/keshavaa.blue1.webp" 
             alt="Keshavaa Luxury" 
             width={156} 
             height={54} 

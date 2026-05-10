@@ -9,7 +9,7 @@ const Hero = () => {
          {/* Immersive Background Visual */}
          <div className="hero-bg">
             <Image
-               src="/assets/bulding3.png"
+               src="/assets/bulding3.webp"
                alt="Keshavaa La Arena"
                fill
                priority
