@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { getTrackingData } from '@/lib/tracking';
 
 const Popup = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,9 +11,12 @@ const Popup = () => {
     name: '',
     phone: '',
     city: '',
+    honeypot: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const showPopup = useCallback(() => {
     if (!isDismissed) {
@@ -92,27 +97,52 @@ const Popup = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+
+    if (!captchaToken) {
+      alert("Please complete the hCaptcha.");
+      return;
+    }
+
     if (validate()) {
       setIsSubmitting(true);
+      const trackingData = getTrackingData();
+
       const payload = {
         name: formData.name,
         mobile: formData.phone,
         city: formData.city,
         source: "Website Popup",
-        project: "Keshavaa La Arena"
+        project: "Keshavaa La Arena",
+        token: captchaToken,
+        honeypot: formData.honeypot,
+        ...trackingData
       };
 
       try {
-        await fetch('https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f', {
+        const response = await fetch('/api/submit-lead', {
           method: 'POST',
-          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(payload),
         });
         
-        window.location.href = '/thankyou';
+        const result = await response.json();
+
+        if (result.success) {
+          if (!result.isBot) {
+            window.location.href = '/thankyou';
+          } else {
+            // Fake success for bots
+            setIsVisible(false);
+            setIsDismissed(true);
+          }
+        } else {
+          alert(result.message || "Submission failed. Please try again.");
+          setIsSubmitting(false);
+          captchaRef.current?.resetCaptcha();
+          setCaptchaToken(null);
+        }
       } catch (error) {
         console.error('Lead submission failed:', error);
         window.location.href = '/thankyou';
@@ -133,11 +163,24 @@ const Popup = () => {
            <p className="desc">Before you go — download the official brochure and availability list for La Arena, Goa.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="popup-form">
+        <form onSubmit={handleSubmit} className="popup-form" autoComplete="off">
+          {/* Honeypot Field */}
+          <div style={{ display: 'none' }}>
+            <input 
+              type="text" 
+              name="website" 
+              value={formData.honeypot}
+              onChange={handleInputChange}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+          </div>
+
           <div className="input-group">
             <input 
               type="text" name="name" placeholder="YOUR NAME" 
               required value={formData.name} onChange={handleInputChange}
+              autoComplete="off"
             />
             {errors.name && <span className="error">{errors.name}</span>}
           </div>
@@ -145,6 +188,7 @@ const Popup = () => {
             <input 
               type="tel" name="phone" placeholder="PHONE NUMBER" 
               required value={formData.phone} onChange={handleInputChange}
+              autoComplete="off"
             />
             {errors.phone && <span className="error">{errors.phone}</span>}
           </div>
@@ -152,9 +196,20 @@ const Popup = () => {
             <input 
               type="text" name="city" placeholder="YOUR CITY" 
               required value={formData.city} onChange={handleInputChange}
+              autoComplete="off"
             />
             {errors.city && <span className="error">{errors.city}</span>}
           </div>
+
+          <div className="captcha-wrapper">
+            <HCaptcha
+              sitekey="89149e3e-cb6e-4bd0-b14e-ff309f10a026"
+              onVerify={(token) => setCaptchaToken(token)}
+              ref={captchaRef}
+              size="compact"
+            />
+          </div>
+
           <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city || isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'DOWNLOAD BROCHURE'}</button>
         </form>
 
@@ -164,13 +219,18 @@ const Popup = () => {
                 <div className="avatar">RK</div>
                 <div className="avatar">MP</div>
             </div>
-            <p>Join 200+ families who've already enquired</p>
+            <p>Join 200+ families who&apos;ve already enquired</p>
         </div>
 
         <p className="footer-note">EXCLUSIVE KESHAVAA SIGNATURE ESTATE</p>
       </div>
 
       <style jsx>{`
+        .captcha-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 5px;
+        }
         .popup-overlay {
           position: fixed; inset: 0; background: rgba(8, 22, 23, 0.95);
           backdrop-filter: blur(15px); z-index: 10000;
@@ -180,7 +240,7 @@ const Popup = () => {
 
         .popup-content {
           background: #ffffff; width: 100%; max-width: 420px;
-          padding: 50px; border-radius: 8px; position: relative;
+          padding: 40px 50px; border-radius: 8px; position: relative;
           box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
           animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -193,20 +253,20 @@ const Popup = () => {
         }
         .close-btn:hover { opacity: 1; }
 
-        .popup-header { text-align: center; margin-bottom: 35px; }
+        .popup-header { text-align: center; margin-bottom: 25px; }
         .eyebrow {
           display: block; font-family: var(--font-inter); font-size: 10px;
           font-weight: 800; letter-spacing: 0.5em; color: var(--accent-primary);
-          margin-bottom: 15px;
+          margin-bottom: 10px;
         }
         .title {
           font-family: var(--font-inter); font-size: 32px; font-weight: 300;
-          color: var(--text-primary); margin-bottom: 15px; letter-spacing: -1px;
+          color: var(--text-primary); margin-bottom: 10px; letter-spacing: -1px;
         }
         .title span { font-family: var(--font-playfair); font-style: italic; color: var(--accent-primary); }
-        .desc { font-family: var(--font-inter); font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+        .desc { font-family: var(--font-inter); font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
-        .popup-form { display: flex; flex-direction: column; gap: 20px; }
+        .popup-form { display: flex; flex-direction: column; gap: 15px; }
         
         .input-group { position: relative; }
         .error {
@@ -216,7 +276,7 @@ const Popup = () => {
         }
 
         input {
-          width: 100%; padding: 16px; border: none; background: #f8fcfc;
+          width: 100%; padding: 14px; border: none; background: #f8fcfc;
           border-bottom: 2px solid #eee; font-family: var(--font-inter);
           font-size: 12px; font-weight: 700; letter-spacing: 1px;
           transition: border-color 0.3s;
@@ -225,22 +285,22 @@ const Popup = () => {
 
         .submit-btn {
           background: var(--accent-primary); color: #fff; border: none;
-          padding: 18px; font-family: var(--font-inter); font-weight: 900;
+          padding: 16px; font-family: var(--font-inter); font-weight: 900;
           font-size: 11px; letter-spacing: 3px; cursor: pointer;
           transition: transform 0.3s, background 0.3s; border-radius: 4px;
-          margin-top: 10px;
+          margin-top: 5px;
         }
         .submit-btn:hover { background: var(--bg-deep); transform: translateY(-3px); }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .social-proof {
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             background: #fdfaf5;
-            padding: 12px;
+            padding: 10px;
             border-radius: 6px;
         }
         .avatar-group { display: flex; }
@@ -254,10 +314,11 @@ const Popup = () => {
         .social-proof p {
             font-family: var(--font-inter); font-size: 11px;
             font-weight: 600; color: var(--text-secondary);
+            margin: 0;
         }
 
         .footer-note {
-           text-align: center; margin-top: 30px; font-family: var(--font-inter);
+           text-align: center; margin-top: 20px; font-family: var(--font-inter);
            font-size: 9px; font-weight: 800; letter-spacing: 2px;
            color: var(--text-primary); opacity: 0.3;
         }
@@ -266,7 +327,7 @@ const Popup = () => {
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 480px) {
-           .popup-content { padding: 40px 25px; }
+           .popup-content { padding: 30px 20px; }
            .title { font-size: 28px; }
         }
       `}</style>

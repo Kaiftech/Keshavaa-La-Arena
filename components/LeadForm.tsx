@@ -1,16 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { getTrackingData } from '@/lib/tracking';
 
 const LeadForm = () => {
-  const [formData, setFormData] = useState({ name: '', city: '', phone: '' });
+  const [formData, setFormData] = useState({ name: '', city: '', phone: '', honeypot: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+    
+    if (!captchaToken) {
+      alert("Please complete the hCaptcha.");
+      return;
+    }
+
     setIsSubmitting(true);
+    
+    const trackingData = getTrackingData();
     
     // CRM Mapping: Name->name, Mobile->mobile, Remark->city, Source->source
     const payload = {
@@ -18,31 +30,42 @@ const LeadForm = () => {
       mobile: formData.phone,
       city: formData.city,
       source: "Website LeadForm",
-      project: "Keshavaa La Arena"
+      project: "Keshavaa La Arena",
+      token: captchaToken,
+      honeypot: formData.honeypot,
+      ...trackingData
     };
 
     try {
-      // Using no-cors to handle the connector endpoint safely in browser
-      await fetch('https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f', {
+      const response = await fetch('/api/submit-lead', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
       });
       
-      setSubmitted(true);
-      setTimeout(() => {
-        window.location.href = '/thankyou';
-      }, 1000);
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        // Only redirect if NOT a bot
+        if (!result.isBot) {
+          setTimeout(() => {
+            window.location.href = '/thankyou';
+          }, 1000);
+        }
+      } else {
+        alert(result.message || "Submission failed. Please try again.");
+        setIsSubmitting(false);
+        captchaRef.current?.resetCaptcha();
+        setCaptchaToken(null);
+      }
     } catch (error) {
       console.error('Lead submission failed:', error);
-      // Fallback for user experience
+      // Fallback: still show success but don't redirect if it's an error that might be bot-related
       setSubmitted(true);
-      setTimeout(() => {
-        window.location.href = '/thankyou';
-      }, 1000);
+      setIsSubmitting(false);
     }
   };
 
@@ -67,7 +90,19 @@ const LeadForm = () => {
              <p className="desc">Request exclusive access to pre-launch pricing and floor plans.</p>
           </div>
 
-          <form className="lead-form" onSubmit={handleSubmit}>
+          <form className="lead-form" onSubmit={handleSubmit} autoComplete="off">
+            {/* Honeypot Field */}
+            <div style={{ display: 'none' }}>
+              <input 
+                type="text" 
+                name="website" 
+                value={formData.honeypot}
+                onChange={(e) => setFormData({...formData, honeypot: e.target.value})}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
             <div className="form-group">
               <label>FULL NAME</label>
               <input 
@@ -76,6 +111,7 @@ const LeadForm = () => {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
+                autoComplete="off"
               />
             </div>
             
@@ -88,6 +124,7 @@ const LeadForm = () => {
                    required
                    value={formData.phone}
                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                   autoComplete="off"
                  />
                </div>
                
@@ -99,8 +136,17 @@ const LeadForm = () => {
                    required
                    value={formData.city}
                    onChange={(e) => setFormData({...formData, city: e.target.value})}
+                   autoComplete="off"
                  />
                </div>
+            </div>
+
+            <div className="captcha-container">
+              <HCaptcha
+                sitekey="89149e3e-cb6e-4bd0-b14e-ff309f10a026"
+                onVerify={(token) => setCaptchaToken(token)}
+                ref={captchaRef}
+              />
             </div>
 
             <button type="submit" className="submit-btn" disabled={isSubmitting}>
@@ -115,6 +161,11 @@ const LeadForm = () => {
       )}
 
       <style jsx>{`
+        .captcha-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 10px;
+        }
         .lead-form-container {
            position: relative;
            background: white;
