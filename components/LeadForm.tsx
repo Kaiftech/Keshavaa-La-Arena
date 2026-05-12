@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { getTrackingData } from '@/lib/tracking';
 
 const LeadForm = () => {
@@ -142,9 +142,9 @@ const LeadForm = () => {
             </div>
 
             <div className="captcha-container">
-              <HCaptcha
-                sitekey="89149e3e-cb6e-4bd0-b14e-ff309f10a026"
-                onVerify={(token) => setCaptchaToken(token)}
+              <Turnstile
+                siteKey="0x4AAAAAADN02Tetw-4IdAeb"
+                onSuccess={(token) => setCaptchaToken(token)}
                 ref={captchaRef}
               />
             </div>

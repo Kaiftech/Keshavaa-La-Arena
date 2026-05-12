@@ -14,9 +14,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, isBot: true });
     }
 
-    // 2. hCaptcha verification
-    const secretKey = 'ES_db897119e4b041c18756ce5b015ff546';
-    const verifyUrl = `https://hcaptcha.com/siteverify`;
+    // 2. Cloudflare Turnstile verification
+    const secretKey = '0x4AAAAAADN02fAylurgo3OamETY5F71yZ0';
+    const verifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
     
     const verifyResponse = await fetch(verifyUrl, {
       method: 'POST',
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     const verifyData = await verifyResponse.json();
 
     if (!verifyData.success) {
-      console.log('hCaptcha verification failed:', verifyData['error-codes']);
+      console.log('Turnstile verification failed:', verifyData['error-codes']);
       return NextResponse.json({ success: false, message: 'Captcha verification failed' }, { status: 400 });
     }
 
