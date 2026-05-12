@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { getTrackingData } from '@/lib/tracking';
 
 const LeadForm = () => {
@@ -9,14 +9,14 @@ const LeadForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
+  const captchaRef = useRef<TurnstileInstance>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
     
     if (!captchaToken) {
-      alert("Please complete the hCaptcha.");
+      alert("Please complete the security verification.");
       return;
     }
 
@@ -48,17 +48,17 @@ const LeadForm = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitted(true);
-        // Only redirect if NOT a bot
         if (!result.isBot) {
+          setSubmitted(true);
           setTimeout(() => {
             window.location.href = '/thankyou';
           }, 1000);
+        } else {
+          setIsSubmitting(false);
         }
       } else {
         alert(result.message || "Submission failed. Please try again.");
         setIsSubmitting(false);
-        captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
       }
     } catch (error) {
@@ -143,9 +143,14 @@ const LeadForm = () => {
 
             <div className="captcha-container">
               <Turnstile
-                siteKey="0x4AAAAAADN02Tetw-4IdAeb"
+                siteKey="1x00000000000000000000AA"
                 onSuccess={(token) => setCaptchaToken(token)}
                 ref={captchaRef}
+                options={{
+                  appearance: "always",
+                  theme: "light",
+                  size: "normal"
+                }}
               />
             </div>
 
@@ -165,6 +170,7 @@ const LeadForm = () => {
           display: flex;
           justify-content: center;
           margin-bottom: 10px;
+          min-height: 65px;
         }
         .lead-form-container {
            position: relative;

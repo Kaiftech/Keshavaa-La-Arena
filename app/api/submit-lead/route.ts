@@ -60,12 +60,13 @@ export async function POST(request: Request) {
       device: formData.device || "",
       trigger: formData.trigger || "",
       page_url: formData.page_url || "",
-      cf_turnstile_token: token, // Sending hCaptcha token here
+      cf_turnstile_token: token,
       project_name: formData.project || "Keshavaa La Arena"
     };
 
     await fetch(googleSheetUrl, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(sheetData),
     });
 

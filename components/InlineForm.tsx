@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { getTrackingData } from '@/lib/tracking';
 
 const InlineForm = () => {
@@ -9,14 +9,14 @@ const InlineForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
+  const captchaRef = useRef<TurnstileInstance>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
 
     if (!captchaToken) {
-      alert("Please complete the hCaptcha.");
+      alert("Please complete the security verification.");
       return;
     }
 
@@ -47,16 +47,17 @@ const InlineForm = () => {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitted(true);
         if (!result.isBot) {
+          setSubmitted(true);
           setTimeout(() => {
             window.location.href = '/thankyou';
           }, 1000);
+        } else {
+          setIsSubmitting(false);
         }
       } else {
         alert(result.message || "Submission failed. Please try again.");
         setIsSubmitting(false);
-        captchaRef.current?.resetCaptcha();
         setCaptchaToken(null);
       }
     } catch (error) {
@@ -124,7 +125,11 @@ const InlineForm = () => {
                   siteKey="0x4AAAAAADN02Tetw-4IdAeb"
                   onSuccess={(token) => setCaptchaToken(token)}
                   ref={captchaRef}
-                  options={{ size: 'flexible' }}
+                  options={{
+                    appearance: "always",
+                    theme: "dark",
+                    size: "normal"
+                  }}
                 />
               </div>
               <button type="submit" className="inline-submit" disabled={isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'RECEIVE BROCHURE'}</button>
@@ -138,6 +143,7 @@ const InlineForm = () => {
           grid-column: span 1;
           display: flex;
           align-items: center;
+          min-height: 65px;
         }
         .inline-form-section {
           background: #081617;

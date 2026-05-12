@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Turnstile } from '@marsidev/react-turnstile';
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { getTrackingData } from '@/lib/tracking';
 
 const Popup = () => {
@@ -16,7 +16,7 @@ const Popup = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<HCaptcha>(null);
+  const captchaRef = useRef<TurnstileInstance>(null);
 
   const showPopup = useCallback(() => {
     if (!isDismissed) {
@@ -99,7 +99,7 @@ const Popup = () => {
     if (isSubmitting) return;
 
     if (!captchaToken) {
-      alert("Please complete the hCaptcha.");
+      alert("Please complete the security verification.");
       return;
     }
 
@@ -133,14 +133,12 @@ const Popup = () => {
           if (!result.isBot) {
             window.location.href = '/thankyou';
           } else {
-            // Fake success for bots
-            setIsVisible(false);
-            setIsDismissed(true);
+            // It's a bot, just stop loading and let it sit there or close silently
+            setIsSubmitting(false);
           }
         } else {
           alert(result.message || "Submission failed. Please try again.");
           setIsSubmitting(false);
-          captchaRef.current?.resetCaptcha();
           setCaptchaToken(null);
         }
       } catch (error) {
@@ -206,7 +204,11 @@ const Popup = () => {
               siteKey="0x4AAAAAADN02Tetw-4IdAeb"
               onSuccess={(token) => setCaptchaToken(token)}
               ref={captchaRef}
-              options={{ size: 'flexible' }}
+              options={{
+                appearance: "always",
+                theme: "light",
+                size: "normal"
+              }}
             />
           </div>
 
@@ -230,6 +232,7 @@ const Popup = () => {
           display: flex;
           justify-content: center;
           margin-bottom: 5px;
+          min-height: 65px;
         }
         .popup-overlay {
           position: fixed; inset: 0; background: rgba(8, 22, 23, 0.95);
