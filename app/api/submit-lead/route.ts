@@ -16,16 +16,16 @@ export async function POST(request: Request) {
 
 
 
-    // 3. Forward to CRM
+    // 3. Forward to CRM (fire-and-forget for instant response)
     const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
     
-    const crmResponse = await fetch(crmUrl, {
+    fetch(crmUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
-    });
+    }).catch(err => console.error('CRM fetch error:', err));
 
-    // 4. Forward to Google Sheets
+    // 4. Forward to Google Sheets (fire-and-forget for instant response)
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
     
     // Prepare data for Google Sheets as per the Apps Script expectation
@@ -46,11 +46,11 @@ export async function POST(request: Request) {
       project_name: formData.project || "Keshavaa La Arena"
     };
 
-    await fetch(googleSheetUrl, {
+    fetch(googleSheetUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(sheetData),
-    });
+    }).catch(err => console.error('Google Sheets fetch error:', err));
 
     // Even if CRM or Sheets fails, we return success so the user sees the thank-you page
     return NextResponse.json({ success: true, isBot: false });
