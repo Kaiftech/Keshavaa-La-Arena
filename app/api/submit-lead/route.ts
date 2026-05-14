@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { token, honeypot, ...formData } = body;
+    const { honeypot, ...formData } = body;
 
     // 1. Honeypot check: If the hidden field is filled, it's a bot
     if (honeypot) {
@@ -14,25 +14,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, isBot: true });
     }
 
-    // 2. Cloudflare Turnstile verification
-    const secretKey = '0x4AAAAAADN02fAylurgo3OamETY5F71yZ0';
-    const verifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
-    
-    const verifyResponse = await fetch(verifyUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
-        secret: secretKey,
-        response: token
-      })
-    });
 
-    const verifyData = await verifyResponse.json();
-
-    if (!verifyData.success) {
-      console.log('Turnstile verification failed:', verifyData['error-codes']);
-      return NextResponse.json({ success: false, message: 'Captcha verification failed' }, { status: 400 });
-    }
 
     // 3. Forward to CRM
     const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
@@ -60,7 +42,7 @@ export async function POST(request: Request) {
       device: formData.device || "",
       trigger: formData.trigger || "",
       page_url: formData.page_url || "",
-      cf_turnstile_token: token,
+
       project_name: formData.project || "Keshavaa La Arena"
     };
 

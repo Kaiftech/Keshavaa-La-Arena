@@ -1,24 +1,20 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+
 import { getTrackingData } from '@/lib/tracking';
 
 const InlineForm = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', city: '', honeypot: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<TurnstileInstance>(null);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
 
-    if (!captchaToken) {
-      alert("Please complete the security verification.");
-      return;
-    }
+
 
     setIsSubmitting(true);
     
@@ -30,7 +26,7 @@ const InlineForm = () => {
       city: formData.city,
       source: "Website InlineForm",
       project: "Keshavaa La Arena",
-      token: captchaToken,
+
       honeypot: formData.honeypot,
       ...trackingData
     };
@@ -58,7 +54,7 @@ const InlineForm = () => {
       } else {
         alert(result.message || "Submission failed. Please try again.");
         setIsSubmitting(false);
-        setCaptchaToken(null);
+
       }
     } catch (error) {
       console.error('Lead submission failed:', error);
@@ -120,18 +116,7 @@ const InlineForm = () => {
                 onChange={(e) => setFormData({...formData, city: e.target.value})}
                 autoComplete="off"
               />
-              <div className="captcha-wrapper">
-                <Turnstile
-                  siteKey="0x4AAAAAADN02Tetw-4IdAeb"
-                  onSuccess={(token) => setCaptchaToken(token)}
-                  ref={captchaRef}
-                  options={{
-                    appearance: "always",
-                    theme: "dark",
-                    size: "normal"
-                  }}
-                />
-              </div>
+
               <button type="submit" className="inline-submit" disabled={isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'RECEIVE BROCHURE'}</button>
             </form>
           </div>
@@ -139,12 +124,7 @@ const InlineForm = () => {
       </div>
 
       <style jsx>{`
-        .captcha-wrapper {
-          grid-column: span 1;
-          display: flex;
-          align-items: center;
-          min-height: 65px;
-        }
+
         .inline-form-section {
           background: #081617;
           padding: 80px 20px;

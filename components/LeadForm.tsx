@@ -1,24 +1,20 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+
 import { getTrackingData } from '@/lib/tracking';
 
 const LeadForm = () => {
   const [formData, setFormData] = useState({ name: '', city: '', phone: '', honeypot: '' });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<TurnstileInstance>(null);
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
     
-    if (!captchaToken) {
-      alert("Please complete the security verification.");
-      return;
-    }
+
 
     setIsSubmitting(true);
     
@@ -31,7 +27,7 @@ const LeadForm = () => {
       city: formData.city,
       source: "Website LeadForm",
       project: "Keshavaa La Arena",
-      token: captchaToken,
+
       honeypot: formData.honeypot,
       ...trackingData
     };
@@ -59,7 +55,7 @@ const LeadForm = () => {
       } else {
         alert(result.message || "Submission failed. Please try again.");
         setIsSubmitting(false);
-        setCaptchaToken(null);
+
       }
     } catch (error) {
       console.error('Lead submission failed:', error);
@@ -141,18 +137,7 @@ const LeadForm = () => {
                </div>
             </div>
 
-            <div className="captcha-container">
-              <Turnstile
-                siteKey="1x00000000000000000000AA"
-                onSuccess={(token) => setCaptchaToken(token)}
-                ref={captchaRef}
-                options={{
-                  appearance: "always",
-                  theme: "light",
-                  size: "normal"
-                }}
-              />
-            </div>
+
 
             <button type="submit" className="submit-btn" disabled={isSubmitting}>
                {isSubmitting ? 'SUBMITTING...' : 'REGISTER INTEREST'} <span className="arrow">→</span>
@@ -166,12 +151,7 @@ const LeadForm = () => {
       )}
 
       <style jsx>{`
-        .captcha-container {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 10px;
-          min-height: 65px;
-        }
+
         .lead-form-container {
            position: relative;
            background: white;

@@ -82,7 +82,7 @@ export default function RootLayout({
             }
           `
         }} />
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
+
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}

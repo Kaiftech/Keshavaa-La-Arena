@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+
 import { getTrackingData } from '@/lib/tracking';
 
 const Popup = () => {
@@ -15,8 +15,7 @@ const Popup = () => {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const captchaRef = useRef<TurnstileInstance>(null);
+
 
   const showPopup = useCallback(() => {
     if (!isDismissed) {
@@ -98,10 +97,7 @@ const Popup = () => {
     e.preventDefault();
     if (isSubmitting) return;
 
-    if (!captchaToken) {
-      alert("Please complete the security verification.");
-      return;
-    }
+
 
     if (validate()) {
       setIsSubmitting(true);
@@ -113,7 +109,7 @@ const Popup = () => {
         city: formData.city,
         source: "Website Popup",
         project: "Keshavaa La Arena",
-        token: captchaToken,
+
         honeypot: formData.honeypot,
         ...trackingData
       };
@@ -139,7 +135,7 @@ const Popup = () => {
         } else {
           alert(result.message || "Submission failed. Please try again.");
           setIsSubmitting(false);
-          setCaptchaToken(null);
+
         }
       } catch (error) {
         console.error('Lead submission failed:', error);
@@ -199,18 +195,7 @@ const Popup = () => {
             {errors.city && <span className="error">{errors.city}</span>}
           </div>
 
-          <div className="captcha-wrapper">
-            <Turnstile
-              siteKey="0x4AAAAAADN02Tetw-4IdAeb"
-              onSuccess={(token) => setCaptchaToken(token)}
-              ref={captchaRef}
-              options={{
-                appearance: "always",
-                theme: "light",
-                size: "normal"
-              }}
-            />
-          </div>
+
 
           <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city || isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'DOWNLOAD BROCHURE'}</button>
         </form>
@@ -228,12 +213,7 @@ const Popup = () => {
       </div>
 
       <style jsx>{`
-        .captcha-wrapper {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 5px;
-          min-height: 65px;
-        }
+
         .popup-overlay {
           position: fixed; inset: 0; background: rgba(8, 22, 23, 0.95);
           backdrop-filter: blur(15px); z-index: 10000;
