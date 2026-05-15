@@ -86,63 +86,111 @@ const LeadForm = () => {
              <p className="desc">Request exclusive access to pre-launch pricing and floor plans.</p>
           </div>
 
-          <form className="lead-form" onSubmit={handleSubmit} autoComplete="nope">
-            {/* Honeypot Field */}
-            <div style={{ display: 'none' }}>
-              <input 
-                type="text" 
-                name="website" 
-                value={formData.honeypot}
-                onChange={(e) => setFormData({...formData, honeypot: e.target.value})}
-                tabIndex={-1}
-                autoComplete="nope"
-              />
-            </div>
+<form
+  className="lead-form"
+  onSubmit={handleSubmit}
+  autoComplete="off"
+>
+  {/* Honeypot Field */}
+  <div style={{ display: 'none' }}>
+    <input
+      type="text"
+      name="website"
+      value={formData.honeypot}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          honeypot: e.target.value,
+        })
+      }
+      tabIndex={-1}
+      autoComplete="off"
+    />
+  </div>
 
-            <div className="form-group">
-              <label>FULL NAME</label>
-              <input 
-                type="text" 
-                placeholder="Marcus Aurelius" 
-                required
-                value={formData.name}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                autoComplete="nope"
-              />
-            </div>
-            
-            <div className="form-row">
-               <div className="form-group">
-                 <label>DIRECT TELEPHONE</label>
-                 <input 
-                   type="tel" 
-                   placeholder="+91 . . . . . . . . . ." 
-                   required
-                   value={formData.phone}
-                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                   autoComplete="nope"
-                 />
-               </div>
-               
-               <div className="form-group">
-                 <label>CITY</label>
-                 <input 
-                   type="text" 
-                   placeholder="Your City" 
-                   required
-                   value={formData.city}
-                   onChange={(e) => setFormData({...formData, city: e.target.value})}
-                   autoComplete="nope"
-                 />
-               </div>
-            </div>
+  {/* Autofill traps */}
+  <input
+    type="text"
+    name="fake_username"
+    autoComplete="username"
+    style={{ display: 'none' }}
+  />
 
+  <input
+    type="password"
+    name="fake_password"
+    autoComplete="new-password"
+    style={{ display: 'none' }}
+  />
 
+  <div className="form-group">
+    <label>FULL NAME</label>
+    <input
+      type="text"
+      name="name"
+      placeholder="Marcus Aurelius"
+      required
+      value={formData.name}
+      onChange={(e) =>
+        setFormData({
+          ...formData,
+          name: e.target.value,
+        })
+      }
+      autoComplete="new-password"
+    />
+  </div>
 
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>
-               {isSubmitting ? 'SUBMITTING...' : 'REGISTER INTEREST'} <span className="arrow">→</span>
-            </button>
-          </form>
+  <div className="form-row">
+    <div className="form-group">
+      <label>DIRECT TELEPHONE</label>
+      <input
+        type="tel"
+        name="phone"
+        placeholder="+91 . . . . . . . . . ."
+        required
+        value={formData.phone}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            phone: e.target.value,
+          })
+        }
+        autoComplete="new-password"
+        inputMode="numeric"
+      />
+    </div>
+
+    <div className="form-group">
+      <label>CITY</label>
+      <input
+        type="text"
+        name="city"
+        placeholder="Your City"
+        required
+        value={formData.city}
+        onChange={(e) =>
+          setFormData({
+            ...formData,
+            city: e.target.value,
+          })
+        }
+        autoComplete="new-password"
+      />
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    className="submit-btn"
+    disabled={isSubmitting}
+  >
+    {isSubmitting
+      ? 'SUBMITTING...'
+      : 'REGISTER INTEREST'}{' '}
+    <span className="arrow">→</span>
+  </button>
+</form>
 
           <div className="form-footer">
              <p>GDPR Compliant & Discreet</p>
