@@ -157,48 +157,99 @@ const Popup = () => {
            <p className="desc">Before you go — download the official brochure and availability list for La Arena, Goa.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="popup-form" autoComplete="nope">
-          {/* Honeypot Field */}
-          <div style={{ display: 'none' }}>
-            <input 
-              type="text" 
-              name="website" 
-              value={formData.honeypot}
-              onChange={handleInputChange}
-              tabIndex={-1}
-              autoComplete="nope"
-            />
-          </div>
+<form
+  onSubmit={handleSubmit}
+  className="popup-form"
+  autoComplete="off"
+>
+  {/* Honeypot Field */}
+  <div style={{ display: 'none' }}>
+    <input
+      type="text"
+      name="website"
+      value={formData.honeypot}
+      onChange={handleInputChange}
+      tabIndex={-1}
+      autoComplete="off"
+    />
+  </div>
 
-          <div className="input-group">
-            <input 
-              type="text" name="name" placeholder="YOUR NAME" 
-              required value={formData.name} onChange={handleInputChange}
-              autoComplete="nope"
-            />
-            {errors.name && <span className="error">{errors.name}</span>}
-          </div>
-          <div className="input-group">
-            <input 
-              type="tel" name="phone" placeholder="PHONE NUMBER" 
-              required value={formData.phone} onChange={handleInputChange}
-              autoComplete="nope"
-            />
-            {errors.phone && <span className="error">{errors.phone}</span>}
-          </div>
-          <div className="input-group">
-            <input 
-              type="text" name="city" placeholder="YOUR CITY" 
-              required value={formData.city} onChange={handleInputChange}
-              autoComplete="nope"
-            />
-            {errors.city && <span className="error">{errors.city}</span>}
-          </div>
+  {/* Autofill traps */}
+  <input
+    type="text"
+    name="fake_username"
+    autoComplete="username"
+    style={{ display: 'none' }}
+  />
 
+  <input
+    type="password"
+    name="fake_password"
+    autoComplete="new-password"
+    style={{ display: 'none' }}
+  />
 
+  <div className="input-group">
+    <input
+      type="text"
+      name="name"
+      placeholder="YOUR NAME"
+      required
+      value={formData.name}
+      onChange={handleInputChange}
+      autoComplete="new-password"
+    />
+    {errors.name && (
+      <span className="error">{errors.name}</span>
+    )}
+  </div>
 
-          <button type="submit" className="submit-btn" disabled={!formData.name || !formData.phone || !formData.city || isSubmitting}>{isSubmitting ? 'SUBMITTING...' : 'DOWNLOAD BROCHURE'}</button>
-        </form>
+  <div className="input-group">
+    <input
+      type="tel"
+      name="phone"
+      placeholder="PHONE NUMBER"
+      required
+      value={formData.phone}
+      onChange={handleInputChange}
+      autoComplete="new-password"
+      inputMode="numeric"
+    />
+    {errors.phone && (
+      <span className="error">{errors.phone}</span>
+    )}
+  </div>
+
+  <div className="input-group">
+    <input
+      type="text"
+      name="city"
+      placeholder="YOUR CITY"
+      required
+      value={formData.city}
+      onChange={handleInputChange}
+      autoComplete="new-password"
+    />
+    {errors.city && (
+      <span className="error">{errors.city}</span>
+    )}
+  </div>
+
+  <button
+    type="submit"
+    className="submit-btn"
+    disabled={
+      !formData.name ||
+      !formData.phone ||
+      !formData.city ||
+      isSubmitting
+    }
+  >
+    {isSubmitting
+      ? 'SUBMITTING...'
+      : 'DOWNLOAD BROCHURE'}
+  </button>
+</form>
 
         <div className="social-proof">
             <div className="avatar-group">
