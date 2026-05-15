@@ -157,7 +157,7 @@ const Popup = () => {
            <p className="desc">Before you go — download the official brochure and availability list for La Arena, Goa.</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="popup-form" autoComplete="off">
+        <form onSubmit={handleSubmit} className="popup-form" autoComplete="nope">
           {/* Honeypot Field */}
           <div style={{ display: 'none' }}>
             <input 
@@ -166,7 +166,7 @@ const Popup = () => {
               value={formData.honeypot}
               onChange={handleInputChange}
               tabIndex={-1}
-              autoComplete="off"
+              autoComplete="nope"
             />
           </div>
 
@@ -174,7 +174,7 @@ const Popup = () => {
             <input 
               type="text" name="name" placeholder="YOUR NAME" 
               required value={formData.name} onChange={handleInputChange}
-              autoComplete="off"
+              autoComplete="nope"
             />
             {errors.name && <span className="error">{errors.name}</span>}
           </div>
@@ -182,7 +182,7 @@ const Popup = () => {
             <input 
               type="tel" name="phone" placeholder="PHONE NUMBER" 
               required value={formData.phone} onChange={handleInputChange}
-              autoComplete="off"
+              autoComplete="nope"
             />
             {errors.phone && <span className="error">{errors.phone}</span>}
           </div>
@@ -190,7 +190,7 @@ const Popup = () => {
             <input 
               type="text" name="city" placeholder="YOUR CITY" 
               required value={formData.city} onChange={handleInputChange}
-              autoComplete="off"
+              autoComplete="nope"
             />
             {errors.city && <span className="error">{errors.city}</span>}
           </div>
