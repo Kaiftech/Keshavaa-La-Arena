@@ -86,7 +86,7 @@ const LeadForm = () => {
              <p className="desc">Request exclusive access to pre-launch pricing and floor plans.</p>
           </div>
 
-          <form className="lead-form" onSubmit={handleSubmit} autoComplete="off">
+          <form className="lead-form" onSubmit={handleSubmit} autoComplete="nope">
             {/* Honeypot Field */}
             <div style={{ display: 'none' }}>
               <input 
@@ -95,7 +95,7 @@ const LeadForm = () => {
                 value={formData.honeypot}
                 onChange={(e) => setFormData({...formData, honeypot: e.target.value})}
                 tabIndex={-1}
-                autoComplete="off"
+                autoComplete="nope"
               />
             </div>
 
@@ -107,7 +107,7 @@ const LeadForm = () => {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                autoComplete="off"
+                autoComplete="nope"
               />
             </div>
             
@@ -120,7 +120,7 @@ const LeadForm = () => {
                    required
                    value={formData.phone}
                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                   autoComplete="off"
+                   autoComplete="nope"
                  />
                </div>
                
@@ -132,7 +132,7 @@ const LeadForm = () => {
                    required
                    value={formData.city}
                    onChange={(e) => setFormData({...formData, city: e.target.value})}
-                   autoComplete="off"
+                   autoComplete="nope"
                  />
                </div>
             </div>
