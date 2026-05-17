@@ -115,19 +115,19 @@ const Popup = () => {
       };
 
       try {
-        // Call CRM webhook directly
+        // Call CRM webhook via CORS proxy (fire-and-forget for speed)
         const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
-        const crmResponse = await fetch(crmUrl, {
+        const corsProxyUrl = `https://corsproxy.io/?${encodeURIComponent(crmUrl)}`;
+        fetch(corsProxyUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(payload),
-        });
+        }).then(res => console.log('CRM response:', res.status))
+          .catch(err => console.error('CRM error:', err));
 
-        console.log('CRM response:', crmResponse.status);
-
-        // Call Google Sheets
+        // Call Google Sheets (fire-and-forget for speed)
         const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
         const sheetData = {
           name: payload.name,
@@ -151,6 +151,7 @@ const Popup = () => {
           body: JSON.stringify(sheetData),
         }).catch(err => console.error('Google Sheets error:', err));
 
+        // Immediate redirect
         window.location.href = '/thankyou';
       } catch (error) {
         console.error('Lead submission failed:', error);
