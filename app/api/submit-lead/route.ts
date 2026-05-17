@@ -43,6 +43,9 @@ export async function POST(request: Request) {
       console.error('CRM fetch error:', crmError);
     }
 
+    // Add delay to allow reading logs
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     // 4. Forward to Google Sheets (fire-and-forget for instant response)
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
     
