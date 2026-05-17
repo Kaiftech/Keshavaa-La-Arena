@@ -32,47 +32,27 @@ const InlineForm = () => {
     };
 
     try {
-      // Call CRM webhook via CORS proxy (fire-and-forget for speed)
-      const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
-      const corsProxyUrl = `https://corsproxy.io/?${encodeURIComponent(crmUrl)}`;
-      fetch(corsProxyUrl, {
+      // Call Cloudflare Pages Function
+      const response = await fetch('/api/submit-lead', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
-      }).then(res => console.log('CRM response:', res.status))
-        .catch(err => console.error('CRM error:', err));
+      });
 
-      // Call Google Sheets (fire-and-forget for speed)
-      const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
-      const sheetData = {
-        name: payload.name,
-        mobile: payload.mobile,
-        configuration: (payload as any).configuration || "",
-        form_name: payload.source || "",
-        gclid: (payload as any).gclid || "",
-        utm_source: (payload as any).utm_source || "",
-        utm_medium: (payload as any).utm_medium || "",
-        utm_campaign: (payload as any).utm_campaign || "",
-        utm_term: (payload as any).utm_term || "",
-        device: (payload as any).device || "",
-        trigger: (payload as any).trigger || "",
-        page_url: (payload as any).page_url || "",
-        project_name: payload.project || "Keshavaa La Arena"
-      };
+      const result = await response.json();
+      console.log('Submission result:', result);
 
-      fetch(googleSheetUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(sheetData),
-      }).catch(err => console.error('Google Sheets error:', err));
-
-      // Immediate success response
-      setSubmitted(true);
-      setTimeout(() => {
-        window.location.href = '/thankyou';
-      }, 1000);
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          window.location.href = '/thankyou';
+        }, 1000);
+      } else {
+        alert(result.message || "Submission failed. Please try again.");
+        setIsSubmitting(false);
+      }
     } catch (error) {
       console.error('Lead submission failed:', error);
       alert("Submission failed. Please try again.");
