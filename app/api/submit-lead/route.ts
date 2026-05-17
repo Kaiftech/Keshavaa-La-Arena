@@ -18,12 +18,23 @@ export async function POST(request: Request) {
 
     // 3. Forward to CRM (fire-and-forget for instant response)
     const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
-    
+
+    console.log('Sending to CRM:', crmUrl);
+    console.log('CRM payload:', JSON.stringify(formData, null, 2));
+
     fetch(crmUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
-    }).catch(err => console.error('CRM fetch error:', err));
+    })
+    .then(res => {
+      console.log('CRM response status:', res.status);
+      return res.text();
+    })
+    .then(text => {
+      console.log('CRM response body:', text);
+    })
+    .catch(err => console.error('CRM fetch error:', err));
 
     // 4. Forward to Google Sheets (fire-and-forget for instant response)
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
