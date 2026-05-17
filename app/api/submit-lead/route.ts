@@ -16,25 +16,32 @@ export async function POST(request: Request) {
 
 
 
-    // 3. Forward to CRM (fire-and-forget for instant response)
+    // 3. Forward to CRM (await to catch errors)
     const crmUrl = 'https://connector.b2bbricks.com/api/Integration/hook/53b3d0b4-ffd1-4ba6-b633-f736c36d924f';
 
     console.log('Sending to CRM:', crmUrl);
     console.log('CRM payload:', JSON.stringify(formData, null, 2));
 
-    fetch(crmUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-    .then(res => {
-      console.log('CRM response status:', res.status);
-      return res.text();
-    })
-    .then(text => {
-      console.log('CRM response body:', text);
-    })
-    .catch(err => console.error('CRM fetch error:', err));
+    try {
+      const crmResponse = await fetch(crmUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log('CRM response status:', crmResponse.status);
+      const crmText = await crmResponse.text();
+      console.log('CRM response body:', crmText);
+
+      if (!crmResponse.ok) {
+        console.error('CRM returned error status:', crmResponse.status);
+      }
+    } catch (crmError) {
+      console.error('CRM fetch error:', crmError);
+    }
 
     // 4. Forward to Google Sheets (fire-and-forget for instant response)
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
