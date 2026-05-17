@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // Removed output: 'export' to enable server-side API routes for CRM integration
   // Ensure images are processed efficiently
   images: {
     formats: ['image/avif', 'image/webp'],
