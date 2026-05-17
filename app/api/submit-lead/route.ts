@@ -38,13 +38,16 @@ export async function POST(request: Request) {
 
       if (!crmResponse.ok) {
         console.error('CRM returned error status:', crmResponse.status);
+        // Add delay to allow reading logs
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        return NextResponse.json({ success: false, message: `CRM error: ${crmResponse.status} - ${crmText}` }, { status: 500 });
       }
     } catch (crmError) {
       console.error('CRM fetch error:', crmError);
+      // Add delay to allow reading logs
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      return NextResponse.json({ success: false, message: 'CRM connection failed' }, { status: 500 });
     }
-
-    // Add delay to allow reading logs
-    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // 4. Forward to Google Sheets (fire-and-forget for instant response)
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzUChL241GLYuSeUxn6iUUnJR3a0SilBr3iOtiGthwQPy8LSg6us-HshuY7Lmfwtkqo/exec';
